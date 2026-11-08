@@ -1,0 +1,355 @@
+<section id="smelt-ordered-gain-r2" class="paper-algorithm" lang="zh-CN" aria-label="算法 有序循环的局部放大探针"><style>
+.paper-algorithm {color:var(--foreground);font-family:inherit;font-size:18px;line-height:1.65;width:100%;min-width:0;}
+.paper-algorithm strong {font-weight:500;}
+.paper-algorithm .glyph-bank {position:absolute;pointer-events:none;}
+.paper-algorithm hr {border:0;border-top:1px solid var(--border);margin:1em 0;}
+.paper-algorithm .algorithm-lines {list-style:none;margin:0;padding:0;}
+.paper-algorithm .algorithm-line {display:grid;grid-template-columns:2em minmax(0,1fr);gap:.55em;margin:.6em 0;align-items:start;min-width:0;}
+.paper-algorithm .line-number {font-size:14px;text-align:right;color:var(--muted-foreground);font-variant-numeric:tabular-nums;padding-top:.32em;}
+.paper-algorithm .operation {padding-inline-start:calc(var(--depth)*.9em);min-width:0;}
+.paper-algorithm .chunks {display:flex;flex-wrap:wrap;align-items:center;gap:.25em .2em;min-width:0;}
+.paper-algorithm .math-run {font-size:22px;display:inline-flex;align-items:center;flex:0 0 auto;max-width:none;min-width:0;}
+.paper-algorithm .text-run {max-width:100%;overflow-wrap:anywhere;}
+.paper-algorithm .formula-svg {flex:none;display:block;overflow:visible;max-width:none;}
+.paper-algorithm .line-note {font-size:15px;line-height:1.55;color:var(--muted-foreground);font-style:normal;margin-top:.35em;overflow-wrap:anywhere;}
+@media(max-width:420px){.paper-algorithm .algorithm-line {grid-template-columns:1.5em minmax(0,1fr);gap:.25em;}.paper-algorithm .operation {padding-inline-start:calc(var(--depth)*.5em);}}
+</style><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" class="glyph-bank"><defs><path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-3a6" d="M 2765 3712  L 2765 3584  Q 3117 3584 3440 3501  Q 3763 3418 4041 3248  Q 4320 3078 4489 2787  Q 4659 2496 4659 2112  Q 4659 1754 4489 1462  Q 4320 1171 4054 1001  Q 3789 832 3494 745  Q 3200 659 2925 659  L 2765 659  L 2765 550  Q 2765 307 2909 224  Q 3053 141 3424 122  L 3424 0  L 1466 0  L 1466 122  Q 1798 122 1955 214  Q 2112 307 2112 544  L 2112 659  L 2003 659  Q 1133 659 678 1056  Q 224 1453 224 2112  Q 224 2496 387 2787  Q 550 3078 828 3248  Q 1107 3418 1430 3501  Q 1754 3584 2112 3584  L 2112 3712  Q 2112 3942 1987 4028  Q 1862 4115 1466 4115  L 1466 4237  L 3424 4237  L 3424 4115  Q 3027 4115 2896 4019  Q 2765 3923 2765 3712  z M 2752 3347  L 2752 896  Q 3232 896 3597 1206  Q 3962 1517 3962 2035  Q 3962 2554 3645 2950  Q 3328 3347 2752 3347  z M 2125 896  L 2125 3347  Q 1613 3347 1267 2940  Q 922 2534 922 2035  Q 922 1562 1245 1229  Q 1568 896 2125 896  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2c" d="M 531 -902  L 467 -781  Q 998 -422 998 -96  Q 998 -13 909 -13  Q 883 -13 822 -25  Q 762 -38 723 -38  Q 352 -38 352 288  Q 352 454 457 553  Q 563 653 736 653  Q 954 653 1101 496  Q 1248 339 1248 96  Q 1248 -198 1053 -473  Q 858 -749 531 -902  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-48" d="M 4922 4179  L 4922 4077  Q 4640 4026 4550 3949  Q 4461 3872 4384 3603  L 3539 525  Q 3520 448 3520 371  Q 3520 237 3616 185  Q 3712 134 4026 102  L 4026 0  L 2272 0  L 2272 102  Q 2598 128 2729 237  Q 2861 346 2925 595  L 3334 2086  L 1510 2086  L 1088 525  Q 1069 461 1069 384  Q 1069 243 1149 192  Q 1229 141 1517 102  L 1517 0  L -51 0  L -51 102  Q 211 128 310 230  Q 410 333 499 653  L 1254 3405  Q 1331 3699 1331 3814  Q 1331 3949 1238 3997  Q 1146 4045 838 4077  L 838 4179  L 2573 4179  L 2573 4077  Q 2285 4058 2141 3955  Q 1997 3853 1933 3622  L 1587 2355  L 3411 2355  L 3706 3405  Q 3795 3738 3795 3808  Q 3795 3930 3692 3994  Q 3590 4058 3334 4077  L 3334 4179  L 4922 4179  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-28" d="M 1946 -1030  L 1869 -1133  Q 1126 -710 716 32  Q 307 774 307 1613  Q 307 3386 1888 4326  L 1946 4224  Q 1293 3667 1075 3126  Q 858 2586 858 1632  Q 858 685 1082 96  Q 1306 -493 1946 -1030  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-29" d="M 186 4224  L 262 4326  Q 992 3891 1408 3148  Q 1824 2406 1824 1581  Q 1824 -166 243 -1133  L 186 -1030  Q 845 -486 1059 54  Q 1274 595 1274 1562  Q 1274 2534 1059 3120  Q 845 3706 186 4224  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXSizeOneSym-Regular-302" d="M -1024 3546  L -1434 3546  L -2816 4480  L -4198 3546  L -4608 3546  L -2970 4909  L -2662 4909  L -1024 3546  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-67" d="M 3014 2342  L 2701 2342  Q 2758 2227 2758 2016  Q 2758 1613 2390 1289  Q 2022 966 1574 966  Q 1459 966 1376 986  Q 1357 992 1331 992  Q 1248 992 1174 909  Q 1101 826 1101 730  Q 1101 576 1555 461  Q 2464 243 2464 -352  Q 2464 -781 2105 -1049  Q 1747 -1318 1120 -1318  Q 621 -1318 336 -1142  Q 51 -966 51 -627  Q 51 -378 195 -202  Q 339 -26 800 250  Q 627 352 627 499  Q 627 806 1120 1037  Q 614 1216 614 1728  Q 614 2202 1004 2512  Q 1395 2822 1901 2822  Q 2272 2822 2528 2643  Q 2598 2592 2630 2592  L 3014 2592  L 3014 2342  z M 2253 2227  Q 2253 2477 2166 2579  Q 2080 2682 1894 2682  Q 1587 2682 1350 2362  Q 1114 2042 1114 1581  Q 1114 1357 1216 1229  Q 1318 1101 1498 1101  Q 1818 1101 2042 1478  Q 2253 1837 2253 2227  z M 2080 -576  Q 2080 -352 1878 -201  Q 1677 -51 1165 109  Q 1011 154 947 179  Q 902 179 752 57  Q 602 -64 531 -154  Q 403 -314 403 -525  Q 403 -1178 1216 -1178  Q 1594 -1178 1837 -1002  Q 2080 -826 2080 -576  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2190" d="M 5485 1408  L 1651 1408  Q 1600 1408 1542 1360  Q 1485 1312 1485 1267  Q 1485 1197 1574 1107  Q 1901 794 2099 493  L 1971 371  Q 1178 1286 454 1587  L 454 1651  Q 1190 1965 1978 2874  L 2106 2752  Q 1926 2496 1581 2138  Q 1491 2048 1491 1958  Q 1491 1830 1658 1830  L 5485 1830  L 5485 1408  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-30" d="M 3046 2112  Q 3046 1683 2963 1302  Q 2880 922 2717 602  Q 2554 282 2266 96  Q 1978 -90 1600 -90  Q 1210 -90 915 108  Q 621 307 461 640  Q 301 973 227 1350  Q 154 1728 154 2150  Q 154 2746 301 3222  Q 448 3699 790 4012  Q 1133 4326 1626 4326  Q 2253 4326 2649 3712  Q 3046 3098 3046 2112  z M 2432 2080  Q 2432 3091 2217 3625  Q 2003 4160 1587 4160  Q 1190 4160 979 3622  Q 768 3085 768 2106  Q 768 1120 979 598  Q 1190 77 1600 77  Q 2003 77 2217 598  Q 2432 1120 2432 2080  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-61" d="M 2963 710  L 3046 640  Q 2688 205 2518 70  Q 2349 -64 2157 -64  Q 1901 -64 1901 198  Q 1901 358 2048 934  Q 1690 397 1389 163  Q 1088 -70 749 -70  Q 467 -70 288 125  Q 109 320 109 672  Q 109 1158 387 1664  Q 666 2170 1094 2496  Q 1523 2822 1939 2822  Q 2368 2822 2451 2451  L 2522 2758  L 2541 2778  L 2931 2822  L 2976 2803  Q 2970 2778 2938 2669  Q 2368 595 2368 346  Q 2368 262 2458 262  Q 2554 262 2790 525  L 2963 710  z M 2336 2310  Q 2336 2477 2240 2579  Q 2144 2682 1978 2682  Q 1542 2682 1139 2093  Q 928 1779 787 1395  Q 646 1011 646 717  Q 646 243 1030 243  Q 1408 243 1843 870  Q 2336 1581 2336 2310  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-3d" d="M 4077 2048  L 307 2048  L 307 2470  L 4077 2470  L 4077 2048  z M 4077 768  L 307 768  L 307 1190  L 4077 1190  L 4077 768  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-31" d="M 2522 0  L 755 0  L 755 96  Q 1107 115 1235 227  Q 1363 339 1363 608  L 1363 3482  Q 1363 3795 1171 3795  Q 1082 3795 883 3718  L 710 3654  L 710 3744  L 1856 4326  L 1914 4307  L 1914 486  Q 1914 275 2042 185  Q 2170 96 2522 96  L 2522 0  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2026" d="M 5683 275  Q 5683 134 5577 32  Q 5472 -70 5325 -70  Q 5178 -70 5075 32  Q 4973 134 4973 281  Q 4973 429 5078 534  Q 5184 640 5331 640  Q 5472 640 5577 531  Q 5683 422 5683 275  z M 3552 275  Q 3552 134 3446 32  Q 3341 -70 3193 -70  Q 3046 -70 2944 32  Q 2842 134 2842 281  Q 2842 429 2947 534  Q 3053 640 3200 640  Q 3341 640 3446 531  Q 3552 422 3552 275  z M 1421 275  Q 1421 134 1315 32  Q 1210 -70 1062 -70  Q 915 -70 812 32  Q 710 134 710 281  Q 710 429 816 534  Q 922 640 1069 640  Q 1210 640 1315 531  Q 1421 422 1421 275  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-4b" d="M 4621 4179  L 4621 4077  Q 4442 4077 4128 3840  L 2221 2400  L 3296 525  Q 3443 269 3552 201  Q 3661 134 3962 102  L 3962 0  L 2202 0  L 2202 102  L 2387 122  Q 2682 147 2682 326  Q 2682 365 2672 409  Q 2662 454 2630 515  Q 2598 576 2579 611  Q 2560 646 2509 736  Q 2458 826 2445 851  L 1658 2227  L 1242 710  Q 1171 467 1171 384  Q 1171 237 1264 182  Q 1357 128 1626 102  L 1626 0  L 45 0  L 45 102  Q 320 134 403 211  Q 486 288 563 557  L 1357 3405  Q 1446 3725 1446 3802  Q 1446 3936 1337 4000  Q 1229 4064 941 4077  L 941 4179  L 2669 4179  L 2669 4077  Q 2400 4058 2253 3958  Q 2106 3859 2035 3603  L 1696 2362  L 2675 3059  Q 3590 3706 3590 3936  Q 3590 4032 3360 4058  L 3206 4077  L 3206 4179  L 4621 4179  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-76" d="M 1325 448  L 1523 653  Q 1869 1005 2134 1456  Q 2400 1907 2400 2131  Q 2400 2208 2285 2317  Q 2125 2458 2125 2605  Q 2125 2701 2195 2761  Q 2266 2822 2368 2822  Q 2522 2822 2624 2704  Q 2726 2586 2726 2445  Q 2726 2074 2323 1453  Q 1971 909 1562 474  Q 1504 416 1421 326  Q 1338 237 1299 192  Q 1261 147 1200 86  Q 1139 26 1110 -3  Q 1082 -32 1043 -64  Q 1005 -96 979 -105  Q 954 -115 928 -115  Q 870 -115 870 58  L 870 211  Q 870 1094 717 1990  Q 653 2355 579 2470  Q 506 2586 326 2586  Q 198 2586 128 2579  L 128 2662  Q 480 2720 845 2797  Q 915 2822 973 2822  Q 1011 2822 1033 2739  Q 1056 2656 1165 2093  Q 1280 1510 1325 448  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-73" d="M 998 1926  L 1664 1523  Q 1984 1331 2105 1164  Q 2227 998 2227 736  Q 2227 416 1961 176  Q 1696 -64 1331 -64  Q 1030 -64 864 -6  Q 691 51 570 51  Q 461 51 416 -26  L 333 -26  L 333 979  L 435 979  Q 538 512 730 294  Q 922 77 1248 77  Q 1485 77 1632 211  Q 1779 346 1779 550  Q 1779 845 1440 1030  L 1094 1222  Q 326 1651 326 2150  Q 326 2522 566 2730  Q 806 2938 1210 2938  Q 1491 2938 1638 2867  Q 1754 2816 1818 2816  Q 1862 2816 1920 2880  L 1990 2880  L 2022 2010  L 1926 2010  Q 1818 2445 1654 2621  Q 1491 2797 1203 2797  Q 986 2797 854 2688  Q 723 2579 723 2362  Q 723 2253 796 2128  Q 870 2003 998 1926  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-67" d="M 3008 2483  L 2477 2483  Q 2598 2208 2598 1946  Q 2598 1453 2265 1203  Q 1933 954 1600 954  Q 1530 954 1357 973  L 1235 986  Q 1107 947 979 812  Q 851 678 851 582  Q 851 435 1350 410  L 2176 371  Q 2528 358 2739 172  Q 2950 -13 2950 -314  Q 2950 -685 2566 -986  Q 2035 -1395 1286 -1395  Q 826 -1395 502 -1212  Q 179 -1030 179 -774  Q 179 -595 320 -419  Q 461 -243 806 6  Q 602 102 534 172  Q 467 243 467 346  Q 467 531 762 787  Q 909 915 1037 1043  Q 717 1203 579 1401  Q 442 1600 442 1901  Q 442 2336 752 2640  Q 1062 2944 1510 2944  Q 1766 2944 2022 2848  L 2163 2797  Q 2349 2733 2515 2733  L 3008 2733  L 3008 2483  z M 973 2163  L 973 2144  Q 973 1683 1155 1398  Q 1338 1114 1632 1114  Q 1850 1114 1978 1270  Q 2106 1427 2106 1690  Q 2106 2112 1914 2464  Q 1754 2765 1446 2765  Q 1222 2765 1097 2605  Q 973 2445 973 2163  z M 2771 -410  Q 2771 -230 2595 -163  Q 2419 -96 1978 -96  Q 1344 -96 941 -13  Q 749 -243 688 -348  Q 627 -454 627 -563  Q 627 -774 880 -902  Q 1133 -1030 1555 -1030  Q 2099 -1030 2435 -860  Q 2771 -691 2771 -410  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2f" d="M 1837 4326  L 378 -90  L -58 -90  L 1408 4326  L 1837 4326  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2016" d="M 2522 -1210  L 2099 -1210  L 2099 4416  L 2522 4416  L 2522 -1210  z M 1248 -1210  L 826 -1210  L 826 4416  L 1248 4416  L 1248 -1210  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-32" d="M 3034 877  L 2688 0  L 186 0  L 186 77  L 1325 1286  Q 1773 1754 1965 2144  Q 2157 2534 2157 2950  Q 2157 3379 1920 3616  Q 1683 3853 1267 3853  Q 922 3853 720 3673  Q 518 3494 326 3021  L 192 3053  Q 301 3648 630 3987  Q 960 4326 1523 4326  Q 2054 4326 2380 4006  Q 2707 3686 2707 3200  Q 2707 2477 1888 1613  L 832 486  L 2330 486  Q 2541 486 2665 569  Q 2790 653 2944 915  L 3034 877  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-69" d="M 1690 3834  Q 1690 3699 1597 3603  Q 1504 3507 1376 3507  Q 1235 3507 1152 3600  Q 1069 3693 1069 3846  Q 1069 3994 1155 4090  Q 1242 4186 1370 4186  Q 1498 4186 1594 4080  Q 1690 3974 1690 3834  z M 1421 730  L 1504 659  Q 1235 243 1049 86  Q 864 -70 627 -70  Q 314 -70 314 282  Q 314 467 454 992  L 762 2125  Q 819 2330 819 2406  Q 819 2502 745 2528  Q 672 2554 410 2560  L 410 2662  Q 704 2688 1434 2822  L 1459 2803  L 858 608  Q 794 390 794 326  Q 794 230 883 230  Q 1043 230 1421 730  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-54" d="M 4051 4179  L 3770 3130  L 3661 3142  Q 3680 3302 3680 3437  Q 3680 3955 3034 3955  L 2662 3955  L 1786 819  Q 1696 506 1696 397  Q 1696 250 1766 195  Q 1837 141 2035 122  L 2259 102  L 2259 0  L 416 0  L 416 102  Q 749 134 889 230  Q 1030 326 1101 582  L 2016 3955  Q 1254 3955 988 3817  Q 723 3680 493 3162  L 378 3187  L 646 4179  L 4051 4179  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-77" d="M 2579 2726  L 2784 474  Q 3418 1261 3629 1597  Q 3840 1933 3840 2138  Q 3840 2227 3699 2362  Q 3565 2490 3565 2624  Q 3565 2701 3638 2761  Q 3712 2822 3814 2822  Q 3955 2822 4051 2720  Q 4147 2618 4147 2464  Q 4147 1882 2790 230  L 2733 160  Q 2509 -115 2445 -115  Q 2394 -115 2374 109  L 2189 2093  L 1619 1120  Q 1472 877 1267 486  Q 954 -115 858 -115  Q 813 -115 800 -57  Q 787 0 774 186  L 749 768  Q 698 1818 576 2317  Q 531 2490 476 2538  Q 422 2586 275 2586  L 96 2586  L 96 2669  Q 602 2752 704 2778  Q 736 2784 777 2797  Q 819 2810 844 2816  Q 870 2822 890 2822  Q 941 2822 960 2790  Q 979 2758 1011 2605  Q 1171 1837 1216 806  L 2445 2752  Q 2483 2816 2528 2816  Q 2579 2816 2579 2726  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-4a" d="M 2266 4237  L 2266 4115  Q 1875 4083 1776 3984  Q 1677 3885 1677 3514  L 1677 1184  Q 1677 -90 608 -90  Q 314 -90 138 32  Q -38 154 -38 371  Q -38 499 54 601  Q 147 704 275 704  Q 486 704 589 435  Q 602 403 621 348  Q 640 294 649 265  Q 659 237 678 208  Q 698 179 723 166  Q 749 154 787 154  Q 928 154 976 253  Q 1024 352 1024 602  L 1024 3520  Q 1024 3898 928 3990  Q 832 4083 429 4115  L 429 4237  L 2266 4237  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-56" d="M 4461 4237  L 4461 4115  Q 4262 4109 4134 3990  Q 4006 3872 3872 3533  L 2451 -70  L 2355 -70  L 794 3411  Q 589 3866 467 3987  Q 346 4109 102 4115  L 102 4237  L 1798 4237  L 1798 4115  L 1619 4102  Q 1331 4083 1331 3904  Q 1331 3776 1581 3219  L 2554 1030  L 3494 3392  Q 3616 3699 3616 3853  Q 3616 3898 3606 3933  Q 3597 3968 3584 3993  Q 3571 4019 3536 4038  Q 3501 4058 3481 4067  Q 3462 4077 3411 4086  Q 3360 4096 3337 4099  Q 3315 4102 3248 4108  Q 3181 4115 3155 4115  L 3155 4237  L 4461 4237  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-50" d="M 102 4237  L 1760 4237  Q 2669 4237 3149 3834  Q 3469 3565 3469 3072  Q 3469 2560 3104 2234  Q 2835 1990 2553 1916  Q 2272 1843 1734 1843  Q 1549 1843 1293 1862  L 1293 717  Q 1293 352 1398 246  Q 1504 141 1894 122  L 1894 0  L 102 0  L 102 122  Q 474 147 557 256  Q 640 365 640 781  L 640 3526  Q 640 3885 547 3987  Q 454 4090 102 4115  L 102 4237  z M 1293 3770  L 1293 2118  Q 1510 2099 1683 2099  Q 2202 2099 2486 2352  Q 2771 2605 2771 3040  Q 2771 3558 2476 3779  Q 2182 4000 1517 4000  Q 1382 4000 1337 3952  Q 1293 3904 1293 3770  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-3b" d="M 1116 2832  Q 1222 2726 1222 2579  Q 1222 2432 1116 2329  Q 1011 2227 870 2227  Q 723 2227 617 2332  Q 512 2438 512 2579  Q 512 2733 614 2835  Q 717 2938 870 2938  Q 1011 2938 1116 2832  z M 685 -902  L 621 -781  Q 1152 -435 1152 -102  Q 1152 -70 1126 -41  Q 1101 -13 1062 -13  Q 1043 -13 979 -25  Q 915 -38 883 -38  Q 512 -38 512 294  Q 512 448 621 550  Q 730 653 890 653  Q 1107 653 1254 496  Q 1402 339 1402 83  Q 1402 -218 1210 -480  Q 1018 -742 685 -902  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-7a" d="M 2432 2669  L 582 467  Q 877 403 1021 307  Q 1165 211 1350 -64  Q 1568 -384 1798 -384  Q 1971 -384 1971 -288  Q 1971 -256 1939 -192  Q 1888 -90 1888 -13  Q 1894 70 1958 137  Q 2022 205 2099 205  Q 2202 205 2262 141  Q 2323 77 2323 -32  Q 2323 -230 2156 -374  Q 1990 -518 1728 -518  Q 1459 -518 1005 -237  Q 570 32 333 32  Q 186 32 45 -83  L -13 -26  L 1971 2355  L 1101 2355  Q 845 2355 729 2281  Q 614 2208 518 1971  L 416 1997  L 621 2739  L 2432 2739  L 2432 2669  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-3e" d="M 3974 1594  L 358 -154  L 358 250  L 3123 1626  L 358 3002  L 358 3418  L 3974 1658  L 3974 1594  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2b" d="M 4070 1408  L 2400 1408  L 2400 -262  L 1978 -262  L 1978 1408  L 307 1408  L 307 1830  L 1978 1830  L 1978 3501  L 2400 3501  L 2400 1830  L 4070 1830  L 4070 1408  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-3b5" d="M 2304 627  L 2406 563  Q 1907 -70 1133 -70  Q 192 -70 192 640  Q 192 928 403 1158  Q 614 1389 934 1472  Q 774 1498 684 1616  Q 595 1734 595 1882  Q 602 2266 995 2544  Q 1389 2822 2029 2822  Q 2336 2822 2528 2672  Q 2720 2522 2720 2291  Q 2720 2163 2617 2080  Q 2515 1997 2413 1997  Q 2298 1997 2230 2067  Q 2163 2138 2163 2253  Q 2163 2317 2211 2409  Q 2259 2502 2259 2560  Q 2259 2688 2022 2688  Q 1683 2688 1401 2496  Q 1120 2304 1120 1907  Q 1120 1741 1251 1654  Q 1382 1568 1594 1568  Q 1613 1568 1728 1590  Q 1843 1613 1932 1613  Q 2022 1613 2086 1574  Q 2150 1536 2150 1478  Q 2150 1306 1862 1306  Q 1805 1306 1721 1334  Q 1638 1363 1568 1363  Q 1286 1363 1014 1184  Q 742 1005 742 678  Q 742 410 908 285  Q 1075 160 1312 160  Q 1869 160 2304 627  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2212" d="M 3974 1408  L 410 1408  L 410 1830  L 3974 1830  L 3974 1408  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-64" d="M 3334 4371  L 3373 4333  L 3123 3360  L 2739 1958  Q 2323 429 2323 384  Q 2323 256 2438 256  Q 2522 256 2614 336  Q 2707 416 2963 710  L 3040 646  Q 2547 -83 2099 -83  Q 1978 -83 1907 -6  Q 1837 70 1837 205  Q 1837 397 1920 774  Q 1645 307 1379 118  Q 1114 -70 781 -70  Q 461 -70 278 125  Q 96 320 96 678  Q 96 1440 713 2131  Q 1331 2822 1965 2822  Q 2163 2822 2256 2732  Q 2349 2643 2381 2451  L 2387 2451  L 2675 3494  Q 2765 3808 2765 3949  Q 2765 4051 2694 4076  Q 2624 4102 2355 4115  L 2355 4224  Q 2848 4269 3334 4371  z M 2278 2310  Q 2278 2477 2185 2576  Q 2093 2675 1978 2675  Q 1677 2675 1395 2381  Q 1075 2042 864 1571  Q 653 1101 653 704  Q 653 486 752 361  Q 851 237 1024 237  Q 1312 237 1606 550  Q 1901 864 2089 1350  Q 2278 1837 2278 2310  z " transform="scale(0.015625)" />
+     </defs></svg><hr><ol class="algorithm-lines"><li class="algorithm-line"><span class="line-number" aria-hidden="true">1</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">固定</span><span class="math-run" data-tex="\Phi,H"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31.0" height="14.0" viewBox="0 0 31 14" version="1.1" class="formula-svg" role="img" aria-label="\Phi,H" style="width:1.93750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(0 0.796875)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(76.299988 0.796875)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(115.739969 0.796875)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">的参数、位置、document mask 与随机性</span></div><div class="line-note">K≥1、T≥1、差分步长 ε&gt;0；对状态 H 求导，不更新权重。</div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">2</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">前向求</span><span class="math-run" data-tex="\Phi(H)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35.0" height="14.0" viewBox="0 0 35 14" version="1.1" class="formula-svg" role="img" aria-label="\Phi(H)" style="width:2.18750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(76.299988 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(109.599976 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(181.799957 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">；记录各次访问的 top-k 索引与相邻排名间隙</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">3</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">若间隙为零，标记分支边界；该点不解释为唯一可微 Jacobian</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">4</span><div class="operation" style="--depth:0"><div class="chunks"><span class="math-run" data-tex="\widehat g\leftarrow0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36.0" height="16.0" viewBox="0 0 36 16" version="1.1" class="formula-svg" role="img" aria-label="\widehat g\leftarrow0" style="width:2.25000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(65.058594 11.34375) scale(0.82673)" />
+    <use xlink:href="#STIXGeneral-Italic-67" transform="translate(0 0.734375)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(64.439981 0.734375)" />
+    <use xlink:href="#STIXGeneral-Regular-30" transform="translate(171.479968 0.734375)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">；尚无有效方向</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">5</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">for</span><span class="math-run" data-tex="a=1,\ldots,K"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="71.0" height="14.0" viewBox="0 0 71 14" version="1.1" class="formula-svg" role="img" aria-label="a=1,\ldots,K" style="width:4.43750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-61" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-3d" transform="translate(64.539987 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(147.479968 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(197.479953 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2026" transform="translate(236.919934 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(336.919919 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-4b" transform="translate(376.3599 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">do</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">6</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">抽取非零方向并归一化，标记本方向有效</span><span class="math-run" data-tex="v\leftarrow\operatorname{sg}(v/\|v\|_2)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="94.0" height="16.0" viewBox="0 0 94 16" version="1.1" class="formula-svg" role="img" aria-label="v\leftarrow\operatorname{sg}(v/\|v\|_2)" style="width:5.87500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-76" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(58.83999 0)" />
+    <use xlink:href="#STIXGeneral-Regular-73" transform="translate(165.879977 0)" />
+    <use xlink:href="#STIXGeneral-Regular-67" transform="translate(204.779971 0)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(254.779956 0)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(288.079944 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2f" transform="translate(332.479938 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2016" transform="translate(360.279926 0)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(412.579913 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2016" transform="translate(456.979907 0)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(510.823176 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(550.232541 0)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">7</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">for</span><span class="math-run" data-tex="i=1,\ldots,T"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="66.0" height="14.0" viewBox="0 0 66 14" version="1.1" class="formula-svg" role="img" aria-label="i=1,\ldots,T" style="width:4.12500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-3d" transform="translate(42.239984 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(125.179965 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(175.17995 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2026" transform="translate(214.619931 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(314.619916 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-54" transform="translate(354.059897 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">do</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">8</span><div class="operation" style="--depth:2"><div class="chunks"><span class="math-run" data-tex="w\leftarrow\operatorname{JVP}(\Phi,H;v)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="112.0" height="14.0" viewBox="0 0 112 14" version="1.1" class="formula-svg" role="img" aria-label="w\leftarrow\operatorname{JVP}(\Phi,H;v)" style="width:7.00000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-77" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(81.139993 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-4a" transform="translate(188.17998 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-56" transform="translate(225.479968 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-50" transform="translate(297.67995 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(353.379947 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(386.679935 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(462.979922 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(502.419904 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-3b" transform="translate(574.619885 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(616.859869 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(661.259863 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div><div class="line-note">按真实访问顺序计算 Jv，J=DΦ(H)。</div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">9</span><div class="operation" style="--depth:2"><div class="chunks"><span class="text-run">若 w 非有限，标记该方向无效并退出内循环</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">10</span><div class="operation" style="--depth:2"><div class="chunks"><span class="math-run" data-tex="z\leftarrow\operatorname{VJP}(\Phi,H;\operatorname{sg}(w))"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="136.0" height="15.0" viewBox="0 0 136 15" version="1.1" class="formula-svg" role="img" aria-label="z\leftarrow\operatorname{VJP}(\Phi,H;\operatorname{sg}(w))" style="width:8.50000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-7a" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(53.33999 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-56" transform="translate(160.379977 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-4a" transform="translate(232.579959 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-50" transform="translate(269.879947 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(325.579944 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(358.879932 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(435.179919 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(474.619901 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-3b" transform="translate(546.819882 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-73" transform="translate(589.059866 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-67" transform="translate(627.95986 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(677.959845 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-77" transform="translate(711.259833 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(777.95983 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(811.259818 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div><div class="line-note">在同一基点得到 Jᵀw；cotangent 与探针方向不携带额外求导路径。</div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">11</span><div class="operation" style="--depth:2"><div class="chunks"><span class="text-run">若 z 非有限，标记该方向无效并退出内循环</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">12</span><div class="operation" style="--depth:2"><div class="chunks"><span class="text-run">若</span><span class="math-run" data-tex="\|z\|_2=0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="54.0" height="16.0" viewBox="0 0 54 16" version="1.1" class="formula-svg" role="img" aria-label="\|z\|_2=0" style="width:3.37500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Regular-2016" />
+    <use xlink:href="#STIXGeneral-Italic-7a" transform="translate(52.299988 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2016" transform="translate(91.199982 0)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(145.043251 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-3d" transform="translate(198.892611 0)" />
+    <use xlink:href="#STIXGeneral-Regular-30" transform="translate(281.832592 0)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">，记录退化并退出内循环，保留当前单位 v</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">13</span><div class="operation" style="--depth:2"><div class="chunks"><span class="math-run" data-tex="v\leftarrow\operatorname{sg}(z/\|z\|_2)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="92.0" height="16.0" viewBox="0 0 92 16" version="1.1" class="formula-svg" role="img" aria-label="v\leftarrow\operatorname{sg}(z/\|z\|_2)" style="width:5.75000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-76" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(58.83999 0)" />
+    <use xlink:href="#STIXGeneral-Regular-73" transform="translate(165.879977 0)" />
+    <use xlink:href="#STIXGeneral-Regular-67" transform="translate(204.779971 0)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(254.779956 0)" />
+    <use xlink:href="#STIXGeneral-Italic-7a" transform="translate(288.079944 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2f" transform="translate(326.979938 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2016" transform="translate(354.779926 0)" />
+    <use xlink:href="#STIXGeneral-Italic-7a" transform="translate(407.079913 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2016" transform="translate(445.979907 0)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(499.823176 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(539.232541 0)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">14</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">end for</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">15</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">若该方向已标无效，continue 外循环</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">16</span><div class="operation" style="--depth:1"><div class="chunks"><span class="math-run" data-tex="g\leftarrow\|\operatorname{JVP}(\Phi,H;v)\|_2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="132.0" height="16.0" viewBox="0 0 132 16" version="1.1" class="formula-svg" role="img" aria-label="g\leftarrow\|\operatorname{JVP}(\Phi,H;v)\|_2" style="width:8.25000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-67" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(64.439981 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2016" transform="translate(171.479968 0)" />
+    <use xlink:href="#STIXGeneral-Regular-4a" transform="translate(223.779956 0)" />
+    <use xlink:href="#STIXGeneral-Regular-56" transform="translate(261.079944 0)" />
+    <use xlink:href="#STIXGeneral-Regular-50" transform="translate(333.279926 0)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(388.979922 0)" />
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(422.27991 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(498.579898 0)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(538.019879 0)" />
+    <use xlink:href="#STIXGeneral-Regular-3b" transform="translate(610.219861 0)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(652.459845 0)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(696.859839 0)" />
+    <use xlink:href="#STIXGeneral-Regular-2016" transform="translate(730.159827 0)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(784.003096 -13.228125) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">17</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">若 g 非有限，记录异常并 continue 外循环</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">18</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">若首次有效或</span><span class="math-run" data-tex="g&gt;\widehat g"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32.0" height="16.0" viewBox="0 0 32 16" version="1.1" class="formula-svg" role="img" aria-label="g&gt;\widehat g" style="width:2.00000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-67" transform="translate(0 0.734375)" />
+    <use xlink:href="#STIXGeneral-Regular-3e" transform="translate(64.439981 0.734375)" />
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(212.438556 11.34375) scale(0.82673)" />
+    <use xlink:href="#STIXGeneral-Italic-67" transform="translate(147.379962 0.734375)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">，保存</span><span class="math-run" data-tex="\widehat g\leftarrow g"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36.0" height="16.0" viewBox="0 0 36 16" version="1.1" class="formula-svg" role="img" aria-label="\widehat g\leftarrow g" style="width:2.25000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(65.058594 11.34375) scale(0.82673)" />
+    <use xlink:href="#STIXGeneral-Italic-67" transform="translate(0 0.734375)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(64.439981 0.734375)" />
+    <use xlink:href="#STIXGeneral-Italic-67" transform="translate(171.479968 0.734375)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="math-run" data-tex="\widehat v\leftarrow v"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34.0" height="13.0" viewBox="0 0 34 13" version="1.1" class="formula-svg" role="img" aria-label="\widehat v\leftarrow v" style="width:2.12500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(57.351562 16.78125) scale(0.724888)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(0 0.078125)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(58.83999 0.078125)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(165.879977 0.078125)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div><div class="line-note">有限的 g=0 也是有效结果；零 Jacobian 不应被当作计算失败。</div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">19</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">end for</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">20</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">若无有效方向，返回失败记录并终止</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">21</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">重算</span><span class="math-run" data-tex="\Phi(H+\varepsilon\widehat v)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65.0" height="15.0" viewBox="0 0 65 15" version="1.1" class="formula-svg" role="img" aria-label="\Phi(H+\varepsilon\widehat v)" style="width:4.06250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(0 0.078125)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(76.299988 0.078125)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(109.599976 0.078125)" />
+    <use xlink:href="#STIXGeneral-Regular-2b" transform="translate(196.239954 0.078125)" />
+    <use xlink:href="#STIXGeneral-Italic-3b5" transform="translate(279.179935 0.078125)" />
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(380.931491 16.78125) scale(0.724888)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(323.579929 0.078125)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(367.979922 0.078125)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">与</span><span class="math-run" data-tex="\Phi(H-\varepsilon\widehat v)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65.0" height="15.0" viewBox="0 0 65 15" version="1.1" class="formula-svg" role="img" aria-label="\Phi(H-\varepsilon\widehat v)" style="width:4.06250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(0 0.078125)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(76.299988 0.078125)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(109.599976 0.078125)" />
+    <use xlink:href="#STIXGeneral-Regular-2212" transform="translate(196.239954 0.078125)" />
+    <use xlink:href="#STIXGeneral-Italic-3b5" transform="translate(279.179935 0.078125)" />
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(380.931491 16.78125) scale(0.724888)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(323.579929 0.078125)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(367.979922 0.078125)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">22</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">核对两侧的 top-k 索引均与基点相同；否则只报跨分支有限扰动</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">23</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">同分支时计算中心差分</span><span class="math-run" data-tex="d_\varepsilon\leftarrow"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34.0" height="14.0" viewBox="0 0 34 14" version="1.1" class="formula-svg" role="img" aria-label="d_\varepsilon\leftarrow" style="width:2.12500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-64" transform="translate(0 0.703125)" />
+    <use xlink:href="#STIXGeneral-Italic-3b5" transform="translate(49.999985 -12.525) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(99.929352 0.703125)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="math-run" data-tex="\frac{\Phi(H+\varepsilon\widehat v)-\Phi(H-\varepsilon\widehat v)}{2\varepsilon}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="103.0" height="24.0" viewBox="0 0 103 24" version="1.1" class="formula-svg" role="img" aria-label="\frac{\Phi(H+\varepsilon\widehat v)-\Phi(H-\varepsilon\widehat v)}{2\varepsilon}" style="width:6.43750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 17) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(0 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(53.409991 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(76.719983 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2b" transform="translate(137.367968 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-3b5" transform="translate(195.425954 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(266.156731 62.020313) scale(0.507422)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(226.50595 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(257.585946 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2212" transform="translate(291.003935 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-3a6" transform="translate(349.061921 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(402.471913 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-48" transform="translate(425.781904 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2212" transform="translate(486.429889 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-3b5" transform="translate(544.487876 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(615.218653 62.020313) scale(0.507422)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(575.567871 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(606.647867 50.654688) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(282 -40.303125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-3b5" transform="translate(316.999989 -40.303125) scale(0.7)" />
+    <path d="M 0 13.2625  L 0 19.5125  L 629.957859 19.5125  L 629.957859 13.2625  L 0 13.2625  z " />
+   </g>
+  </g>
+ </g>
+</svg></span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">24</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">报告差分与 JVP 的绝对及相对误差，保留 ε 与浮点精度</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">25</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">return</span><span class="math-run" data-tex="\widehat g,\widehat v"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.0" height="16.0" viewBox="0 0 22 16" version="1.1" class="formula-svg" role="img" aria-label="\widehat g,\widehat v" style="width:1.37500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(65.058594 11.34375) scale(0.82673)" />
+    <use xlink:href="#STIXGeneral-Italic-67" transform="translate(0 0.734375)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(49.999985 0.734375)" />
+    <use xlink:href="#STIXSizeOneSym-Regular-302" transform="translate(146.791528 17.4375) scale(0.724888)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(89.439966 0.734375)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">、差分结果、路由切换与异常记录</span></div><div class="line-note">精确局部微分与单位方向下 ĝ≤‖DΦ(H)‖₂；有限精度另计误差。未见 ĝ&gt;1 不能认证收缩。</div></div></li></ol><hr><script type="application/json" class="algorithm-source">{"key": "smelt-ordered-gain-r2", "title": "算法 有序循环的局部放大探针", "lines": [{"depth": 0, "chunks": [{"t": "固定"}, {"m": "\\Phi,H"}, {"t": "的参数、位置、document mask 与随机性"}], "note": "K≥1、T≥1、差分步长 ε>0；对状态 H 求导，不更新权重。"}, {"depth": 0, "chunks": [{"t": "前向求"}, {"m": "\\Phi(H)"}, {"t": "；记录各次访问的 top-k 索引与相邻排名间隙"}]}, {"depth": 0, "chunks": [{"t": "若间隙为零，标记分支边界；该点不解释为唯一可微 Jacobian"}]}, {"depth": 0, "chunks": [{"m": "\\widehat g\\leftarrow0"}, {"t": "；尚无有效方向"}]}, {"depth": 0, "chunks": [{"t": "for"}, {"m": "a=1,\\ldots,K"}, {"t": "do"}]}, {"depth": 1, "chunks": [{"t": "抽取非零方向并归一化，标记本方向有效"}, {"m": "v\\leftarrow\\operatorname{sg}(v/\\|v\\|_2)"}]}, {"depth": 1, "chunks": [{"t": "for"}, {"m": "i=1,\\ldots,T"}, {"t": "do"}]}, {"depth": 2, "chunks": [{"m": "w\\leftarrow\\operatorname{JVP}(\\Phi,H;v)"}], "note": "按真实访问顺序计算 Jv，J=DΦ(H)。"}, {"depth": 2, "chunks": [{"t": "若 w 非有限，标记该方向无效并退出内循环"}]}, {"depth": 2, "chunks": [{"m": "z\\leftarrow\\operatorname{VJP}(\\Phi,H;\\operatorname{sg}(w))"}], "note": "在同一基点得到 Jᵀw；cotangent 与探针方向不携带额外求导路径。"}, {"depth": 2, "chunks": [{"t": "若 z 非有限，标记该方向无效并退出内循环"}]}, {"depth": 2, "chunks": [{"t": "若"}, {"m": "\\|z\\|_2=0"}, {"t": "，记录退化并退出内循环，保留当前单位 v"}]}, {"depth": 2, "chunks": [{"m": "v\\leftarrow\\operatorname{sg}(z/\\|z\\|_2)"}]}, {"depth": 1, "chunks": [{"t": "end for"}]}, {"depth": 1, "chunks": [{"t": "若该方向已标无效，continue 外循环"}]}, {"depth": 1, "chunks": [{"m": "g\\leftarrow\\|\\operatorname{JVP}(\\Phi,H;v)\\|_2"}]}, {"depth": 1, "chunks": [{"t": "若 g 非有限，记录异常并 continue 外循环"}]}, {"depth": 1, "chunks": [{"t": "若首次有效或"}, {"m": "g>\\widehat g"}, {"t": "，保存"}, {"m": "\\widehat g\\leftarrow g"}, {"m": "\\widehat v\\leftarrow v"}], "note": "有限的 g=0 也是有效结果；零 Jacobian 不应被当作计算失败。"}, {"depth": 0, "chunks": [{"t": "end for"}]}, {"depth": 0, "chunks": [{"t": "若无有效方向，返回失败记录并终止"}]}, {"depth": 0, "chunks": [{"t": "重算"}, {"m": "\\Phi(H+\\varepsilon\\widehat v)"}, {"t": "与"}, {"m": "\\Phi(H-\\varepsilon\\widehat v)"}]}, {"depth": 0, "chunks": [{"t": "核对两侧的 top-k 索引均与基点相同；否则只报跨分支有限扰动"}]}, {"depth": 0, "chunks": [{"t": "同分支时计算中心差分"}, {"m": "d_\\varepsilon\\leftarrow"}, {"m": "\\frac{\\Phi(H+\\varepsilon\\widehat v)-\\Phi(H-\\varepsilon\\widehat v)}{2\\varepsilon}"}]}, {"depth": 0, "chunks": [{"t": "报告差分与 JVP 的绝对及相对误差，保留 ε 与浮点精度"}]}, {"depth": 0, "chunks": [{"t": "return"}, {"m": "\\widehat g,\\widehat v"}, {"t": "、差分结果、路由切换与异常记录"}], "note": "精确局部微分与单位方向下 ĝ≤‖DΦ(H)‖₂；有限精度另计误差。未见 ĝ>1 不能认证收缩。"}]}</script></section>

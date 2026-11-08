@@ -6,7 +6,7 @@ Use supplied or primary-source verified information. Never infer a person's cred
 
 ## Add a note
 
-Create `src/content/notes/descriptive-slug.mdx`:
+Create `src/content/notes/descriptive-slug.mdx` (or `.md` for content that does not need JSX):
 
 ```yaml
 ---

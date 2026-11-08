@@ -1,0 +1,345 @@
+<div id="posttraining-workbench-20261106" lang="zh-CN">
+  <style>
+    #posttraining-workbench-20261106 {
+      --pw-bg: light-dark(#ffffff, #1b1e22);
+      --pw-side: light-dark(#f6f8f7, #20252a);
+      --pw-text: light-dark(#24332e, #e6ece9);
+      --pw-muted: light-dark(#61716a, #a9b8b1);
+      --pw-line: light-dark(#e1e8e4, #39433e);
+      --pw-accent: light-dark(#325d4d, #bddece);
+      --pw-soft: light-dark(#e7efea, #31463c);
+      --pw-active: light-dark(#244d3c, #d4eadf);
+      --pw-mark: light-dark(#f1f4f2, #2a322d);
+      width: 100%;
+      color: var(--pw-text);
+      font: 16px/1.7 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    #posttraining-workbench-20261106 * { box-sizing: border-box; }
+    #posttraining-workbench-20261106 .pw-window {
+      background: var(--pw-bg);
+      border: 1px solid var(--pw-line);
+      border-radius: 13px;
+      overflow: hidden;
+    }
+    #posttraining-workbench-20261106 .pw-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    #posttraining-workbench-20261106 .pw-sidebar {
+      background: var(--pw-side);
+      padding: 24px 13px;
+      border-bottom: 1px solid var(--pw-line);
+      min-width: 0;
+    }
+    #posttraining-workbench-20261106 .pw-caption {
+      margin: 0 10px 13px;
+      color: var(--pw-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    #posttraining-workbench-20261106 .pw-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+    #posttraining-workbench-20261106 .pw-topic {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      min-width: 0;
+      min-height: 64px;
+      padding: 12px 11px;
+      text-align: left;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--pw-text);
+      font: inherit;
+    }
+    #posttraining-workbench-20261106 .pw-topic:hover { background: var(--pw-soft); }
+    #posttraining-workbench-20261106 .pw-topic[aria-pressed="true"] {
+      background: var(--pw-soft);
+      color: var(--pw-active);
+    }
+    #posttraining-workbench-20261106 .pw-index {
+      flex: 0 0 20px;
+      padding-top: 3px;
+      color: var(--pw-muted);
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+    #posttraining-workbench-20261106 .pw-name { display: block; font-size: 16px; font-weight: 500; }
+    #posttraining-workbench-20261106 .pw-note {
+      display: block;
+      margin-top: 3px;
+      color: var(--pw-muted);
+      font-size: 14px;
+    }
+    #posttraining-workbench-20261106 .pw-detail { min-width: 0; padding: 26px 28px 23px; }
+    #posttraining-workbench-20261106 .pw-meta {
+      margin: 0 100px 10px 0;
+      color: var(--pw-muted);
+      font-size: 14px;
+    }
+    #posttraining-workbench-20261106 h3 {
+      margin: 0;
+      color: var(--pw-text);
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    #posttraining-workbench-20261106 .pw-question { margin: 10px 0 21px; color: var(--pw-muted); }
+    #posttraining-workbench-20261106 .pw-steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 16px;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+    }
+    #posttraining-workbench-20261106 .pw-steps li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      font-size: 15px;
+    }
+    #posttraining-workbench-20261106 .pw-step-number {
+      display: grid;
+      place-items: center;
+      flex: 0 0 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--pw-mark);
+      color: var(--pw-muted);
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+    #posttraining-workbench-20261106 a { text-underline-offset: 4px; }
+    #posttraining-workbench-20261106 .pw-open {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: 7px;
+      background: var(--pw-text);
+      color: var(--pw-bg);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    #posttraining-workbench-20261106 .pw-open:hover { text-decoration: underline; }
+    #posttraining-workbench-20261106 .pw-source {
+      margin: 16px 0 0;
+      color: var(--pw-muted);
+      font-size: 14px;
+    }
+    #posttraining-workbench-20261106 .pw-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 23px;
+      padding: 12px 23px;
+      border-top: 1px solid var(--pw-line);
+      font-size: 15px;
+    }
+    #posttraining-workbench-20261106 .pw-footer a {
+      color: var(--pw-accent);
+      text-decoration: none;
+    }
+    #posttraining-workbench-20261106 .pw-footer a:hover { text-decoration: underline; }
+    @media (max-width: 620px) {
+      #posttraining-workbench-20261106 .pw-layout { grid-template-columns: minmax(0, 1fr); }
+      #posttraining-workbench-20261106 .pw-sidebar {
+        padding: 18px 13px 15px;
+        border-right: 0;
+        border-bottom: 1px solid var(--pw-line);
+      }
+      #posttraining-workbench-20261106 .pw-caption { margin-bottom: 11px; padding-right: 90px; }
+      #posttraining-workbench-20261106 .pw-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+      #posttraining-workbench-20261106 .pw-topic { padding: 11px 8px; gap: 7px; }
+      #posttraining-workbench-20261106 .pw-index { flex-basis: 17px; }
+      #posttraining-workbench-20261106 .pw-name { font-size: 15px; }
+      #posttraining-workbench-20261106 .pw-detail { padding: 23px 21px; }
+      #posttraining-workbench-20261106 .pw-meta { margin-right: 0; }
+      #posttraining-workbench-20261106 .pw-steps { gap: 12px; }
+      #posttraining-workbench-20261106 .pw-footer { padding: 11px 21px; }
+    }
+    @media (max-width: 370px) {
+      #posttraining-workbench-20261106 .pw-steps { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    }
+    @media (pointer: coarse) {
+      #posttraining-workbench-20261106 .pw-footer a { display: inline-flex; align-items: center; min-height: 44px; }
+    }
+  </style>
+  <section class="pw-window" aria-label="学习主题导航">
+    <div class="pw-layout">
+      <aside class="pw-sidebar">
+        <p class="pw-caption">选择主题</p>
+        <nav class="pw-nav" aria-label="八个学习主题">
+<button class="pw-topic cursor-interaction" type="button" data-topic="data" aria-pressed="true" aria-controls="pw-current-topic"><span class="pw-index" aria-hidden="true">01</span><span><span class="pw-name">数据与版本</span><span class="pw-note">环境与监督</span></span></button>
+<button class="pw-topic cursor-interaction" type="button" data-topic="update" aria-pressed="false" aria-controls="pw-current-topic"><span class="pw-index" aria-hidden="true">02</span><span><span class="pw-name">一次参数更新</span><span class="pw-note">SFT 与梯度</span></span></button>
+<button class="pw-topic cursor-interaction" type="button" data-topic="loop" aria-pressed="false" aria-controls="pw-current-topic"><span class="pw-index" aria-hidden="true">03</span><span><span class="pw-name">一次内部循环</span><span class="pw-note">状态与门控</span></span></button>
+<button class="pw-topic cursor-interaction" type="button" data-topic="generation" aria-pressed="false" aria-controls="pw-current-topic"><span class="pw-index" aria-hidden="true">04</span><span><span class="pw-name">训练到生成</span><span class="pw-note">导出与数值</span></span></button>
+<button class="pw-topic cursor-interaction" type="button" data-topic="offline" aria-pressed="false" aria-controls="pw-current-topic"><span class="pw-index" aria-hidden="true">05</span><span><span class="pw-name">离线与过程蒸馏</span><span class="pw-note">教师与对齐</span></span></button>
+<button class="pw-topic cursor-interaction" type="button" data-topic="distillation" aria-pressed="false" aria-controls="pw-current-topic"><span class="pw-index" aria-hidden="true">06</span><span><span class="pw-name">接入在线蒸馏</span><span class="pw-note">前缀与同步</span></span></button>
+<button class="pw-topic cursor-interaction" type="button" data-topic="rl" aria-pressed="false" aria-controls="pw-current-topic"><span class="pw-index" aria-hidden="true">07</span><span><span class="pw-name">强化学习与偏好</span><span class="pw-note">完整 RL 主线</span></span></button>
+<button class="pw-topic cursor-interaction" type="button" data-topic="systems" aria-pressed="false" aria-controls="pw-current-topic"><span class="pw-index" aria-hidden="true">08</span><span><span class="pw-name">系统与评测</span><span class="pw-note">执行与成本</span></span></button>
+</nav>
+      </aside>
+      <section class="pw-detail" id="pw-current-topic" aria-labelledby="pw-current-title">
+        <div aria-live="polite" aria-atomic="true">
+          <p class="pw-meta" data-field="meta">环节 01 至 02 · 环境与数据</p>
+          <h3 id="pw-current-title" data-field="title">数据构建与版本固定</h3>
+          <p class="pw-question" data-field="question">原始问题怎样变成可重建、无重叠且监督清楚的训练批次？</p>
+        </div>
+        <ol class="pw-steps" aria-label="本课计算顺序">
+          <li><span class="pw-step-number" aria-hidden="true">1</span><span data-step>版本与样本身份</span></li>
+          <li><span class="pw-step-number" aria-hidden="true">2</span><span data-step>模板与监督位置</span></li>
+          <li><span class="pw-step-number" aria-hidden="true">3</span><span data-step>去重与数据留出</span></li>
+          <li><span class="pw-step-number" aria-hidden="true">4</span><span data-step>配比与数据清单</span></li>
+        </ol>
+        <a class="pw-open cursor-interaction" data-lesson-link href="https://chatgpt.com/space/page_b39954c20a348191b95d45a766f24ef2" target="_blank" rel="noopener noreferrer"><span>打开学习页</span><span aria-hidden="true">↗</span></a>
+        <p class="pw-source" data-field="sources">TaH2 数据流水线 · Transformers · Marin</p>
+      </section>
+    </div>
+    <footer class="pw-footer">
+      <a href="https://chatgpt.com/space/page_972238e454f88191a1c09dfe60350931" target="_blank" rel="noopener noreferrer">框架结构与接口 ↗</a>
+      <a href="https://chatgpt.com/space/page_20c2cfeb37588191a19c0b427e4b1f67" target="_blank" rel="noopener noreferrer">研究设想 ↗</a>
+    </footer>
+  </section>
+  <script>
+    (() => {
+      const root = document.getElementById('posttraining-workbench-20261106');
+      const topics = {
+  "data": {
+    "title": "数据构建与版本固定",
+    "meta": "环节 01 至 02 · 环境与数据",
+    "question": "原始问题怎样变成可重建、无重叠且监督清楚的训练批次？",
+    "steps": [
+      "版本与样本身份",
+      "模板与监督位置",
+      "去重与数据留出",
+      "配比与数据清单"
+    ],
+    "sources": "TaH2 数据流水线 · Transformers · Marin",
+    "url": "https://chatgpt.com/space/page_b39954c20a348191b95d45a766f24ef2"
+  },
+  "update": {
+    "title": "一次参数更新",
+    "meta": "环节 03 · SFT 与优化",
+    "question": "一个批次怎样形成损失、梯度和实际参数变化？",
+    "steps": [
+      "输入与因果目标",
+      "损失分子与分母",
+      "参数组与梯度",
+      "更新与精度记录"
+    ],
+    "sources": "TaH2 训练器 · PyTorch · PEFT",
+    "url": "https://chatgpt.com/space/page_6a7d786183d0819192c20a043a45d647"
+  },
+  "loop": {
+    "title": "一次内部循环",
+    "meta": "环节 04 至 06 · 状态与深度",
+    "question": "模型怎样保留状态、读取历史并决定是否继续计算？",
+    "steps": [
+      "updater 与状态",
+      "位置与 DUO 缓存",
+      "lookahead 与标签",
+      "混合读出与梯度"
+    ],
+    "sources": "TaH2 模型 · Runtime · Cache",
+    "url": "https://chatgpt.com/space/page_31a843d260588191a252ae63fa65f811"
+  },
+  "generation": {
+    "title": "从训练到自主生成",
+    "meta": "环节 07 · 导出与执行",
+    "question": "保存后的计算怎样在生成端保持相同含义？",
+    "steps": [
+      "模型与组件导出",
+      "prefill 与 decode",
+      "固定深度数值对照",
+      "自主路由与停止"
+    ],
+    "sources": "TaH2 · Bundled MiniSGL",
+    "url": "https://chatgpt.com/space/page_0626be2568f8819187b536e037f9a6a9"
+  },
+  "offline": {
+    "title": "离线蒸馏与过程监督",
+    "meta": "环节 08 · 教师与内部计算",
+    "question": "教师的文字、分布与特征分别怎样训练学生？",
+    "steps": [
+      "轨迹与分布目标",
+      "教师与学生输入",
+      "位置与特征对齐",
+      "中间状态的后续使用"
+    ],
+    "sources": "CODI 固定源码 · 教师接口",
+    "url": "https://chatgpt.com/space/page_a1b4546efc988191a19aeb2193c29651"
+  },
+  "distillation": {
+    "title": "接入在线蒸馏",
+    "meta": "环节 09 · 学生前缀与同步",
+    "question": "学生自产前缀怎样接上教师评分、更新和再次生成？",
+    "steps": [
+      "学生生成并记版本",
+      "教师概率与 top k",
+      "直接 KD 或 PG",
+      "两次更新与同步"
+    ],
+    "sources": "verl OPD · TaH2 接入边界",
+    "url": "https://chatgpt.com/space/page_e434e46c533c819192afedba5f10a140"
+  },
+  "rl": {
+    "title": "强化学习与偏好优化",
+    "meta": "环节 10 · 完整 RL 学习主线",
+    "question": "从期望奖励到参数更新，数学目标与工程闭环怎样对应？",
+    "steps": [
+      "策略梯度与 GAE",
+      "PPO 与组内优势",
+      "rollout 与权重同步",
+      "DPO 与研究分支"
+    ],
+    "sources": "策略梯度 · PPO · verl v1 · TRL",
+    "url": "https://chatgpt.com/space/page_a04bfe2924d48191b95083d418d93368"
+  },
+  "systems": {
+    "title": "分布式执行与性能评测",
+    "meta": "环节 11 至 12 · 系统与证据",
+    "question": "怎样在两卡资源下验证计算，并比较能力和实际成本？",
+    "steps": [
+      "TP 与 FSDP2 归约",
+      "缓存重计算与恢复",
+      "显存与阶段耗时",
+      "逐题评测与机制干预"
+    ],
+    "sources": "TaH2 · PyTorch · 测量与评测协议",
+    "url": "https://chatgpt.com/space/page_d887d8f1a41881918ecff055e7613c9c"
+  }
+};
+      const buttons = root.querySelectorAll('[data-topic]');
+      const title = root.querySelector('[data-field="title"]');
+      const meta = root.querySelector('[data-field="meta"]');
+      const question = root.querySelector('[data-field="question"]');
+      const sources = root.querySelector('[data-field="sources"]');
+      const steps = root.querySelectorAll('[data-step]');
+      const lessonLink = root.querySelector('[data-lesson-link]');
+      function showTopic(key) {
+        const topic = topics[key];
+        if (!topic) return;
+        buttons.forEach((button) => {
+          button.setAttribute('aria-pressed', String(button.dataset.topic === key));
+        });
+        title.textContent = topic.title;
+        meta.textContent = topic.meta;
+        question.textContent = topic.question;
+        sources.textContent = topic.sources;
+        steps.forEach((element, index) => { element.textContent = topic.steps[index]; });
+        lessonLink.setAttribute('href', topic.url);
+        lessonLink.setAttribute('aria-label', '打开《' + topic.title + '》学习页');
+      }
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => showTopic(button.dataset.topic));
+      });
+      showTopic('data');
+    })();
+  </script>
+</div>

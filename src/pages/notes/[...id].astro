@@ -9,9 +9,10 @@ const { note } = Astro.props;
 const { Content, headings } = await render(note);
 const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
 ---
-<Base title={note.data.title} description={note.data.description}>
+<Base title={note.data.title} description={note.data.description} lang={note.data.lang}>
 <PageHeading label="Research notebook" title={note.data.title} description={note.data.description} />
-{(note.data.draft || !note.data.approved || note.data.kind === 'demo') && <div class="review-banner">Technical demonstration / unreviewed draft. This page demonstrates website features and makes no claim of original research. Excluded from production.</div>}
+{note.data.kind === 'demo' ? <div class="review-banner">Technical demonstration. This page demonstrates website features and makes no claim of original research. Excluded from production.</div> : (note.data.draft || !note.data.approved) && <div class="review-banner">研究资料整理稿 · 已授权上传源码，网站内容待审核。文献报告、推导、研究设想和实际运行结果沿用原文区分；本页尚不进入正式网站构建。</div>}
+{note.data.sourceUrl && <div class="source-note"><a href="/notes/loop-reasoning/overview/">← 循环推理研究总览</a><span>来源：<a href={note.data.sourceUrl}>资料空间原页 ↗</a> · 快照日期 2026-11-08</span><p>完整正文与嵌入算法已迁移。原文中的 Library 附件链接继续指向资料空间，访问仍受原权限限制；本次未重新验证论文或运行模型实验。</p></div>}
 <div class="article-grid"><article class="prose"><p class="note-meta">{note.data.kind === 'demo' ? 'Demo created' : 'Entry date'} · {note.data.date.toISOString().slice(0, 10)}</p><Content />
 {note.data.references.length > 0 && <section id="references"><h2>References</h2><ol>{note.data.references.map(ref => <li id={`ref-${ref.id}`}><a href={ref.url}>{ref.title} ↗</a>{ref.bibtex && <details><summary>BibTeX</summary><pre><code>{ref.bibtex}</code></pre></details>}</li>)}</ol></section>}
 </article><aside class="toc" aria-label="On this page"><p class="eyebrow">On this page</p><ol>{toc.map(h => <li class={`depth-${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}{note.data.references.length > 0 && <li><a href="#references">References</a></li>}</ol><a class="text-link" href="/notes/">← All notes</a></aside></div>

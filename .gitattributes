@@ -1,1 +1,5 @@
 * text=auto eol=lf
+# Imported source snapshots retain whitespace and exact embedded file bytes.
+docs/research/embeds/*.html -text -whitespace
+docs/research/pages/*.md -whitespace
+src/content/notes/loop-reasoning/*.md -whitespace

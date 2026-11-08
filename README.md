@@ -32,6 +32,9 @@ Production builds exclude drafts, unapproved notes, and all demos. `build:review
 - `scripts/verify.mjs`: route, local asset/link/fragment, math, code, bibliography and publication-gate checks.
 - `docs/CONTENT.md`: verified content and author review procedure.
 - `docs/DEVELOPMENT.md`: development and release process.
+- `docs/research/`: 24 complete source Pages and 46 original embedded diagrams, with provenance and a migration manifest; see its README for coverage and publication status.
+
+Research source snapshots generate Markdown notes through `npm run sync:research`; `npm run check:research` verifies they have not drifted. Both Markdown and MDX are supported. Migrated research notes remain drafts for website review, while their source files are publicly readable in this repository by the author's upload request.
 
 ## Deployment after review
 

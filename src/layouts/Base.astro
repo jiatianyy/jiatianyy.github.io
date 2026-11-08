@@ -2,13 +2,13 @@
 import '../styles/global.css';
 import 'katex/dist/katex.min.css';
 import { profile } from '../data/site';
-interface Props { title?: string; description?: string; }
-const { title, description = profile.description } = Astro.props;
+interface Props { title?: string; description?: string; lang?: string; }
+const { title, description = profile.description, lang = 'en' } = Astro.props;
 const nav = [['/', 'Home'], ['/research/', 'Research'], ['/publications/', 'Publications'], ['/notes/', 'Research Notes'], ['/projects/', 'Projects'], ['/about/', 'About / CV']];
 const active = Astro.url.pathname;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

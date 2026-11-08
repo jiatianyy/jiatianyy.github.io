@@ -1,0 +1,195 @@
+<section id="posttrain_depth_diagnostic" class="paper-algorithm" lang="zh-CN" aria-label="固定检查点的深度收益配对诊断"><style>
+.paper-algorithm {color:var(--foreground);font-family:inherit;font-size:18px;line-height:1.65;width:100%;min-width:0;}
+.paper-algorithm strong {font-weight:500;}
+.paper-algorithm .glyph-bank {position:absolute;pointer-events:none;}
+.paper-algorithm hr {border:0;border-top:1px solid var(--border);margin:1em 0;}
+.paper-algorithm .algorithm-lines {list-style:none;margin:0;padding:0;}
+.paper-algorithm .algorithm-line {display:grid;grid-template-columns:2em minmax(0,1fr);gap:.55em;margin:.6em 0;align-items:start;min-width:0;}
+.paper-algorithm .line-number {font-size:14px;text-align:right;color:var(--muted-foreground);font-variant-numeric:tabular-nums;padding-top:.32em;}
+.paper-algorithm .operation {padding-inline-start:calc(var(--depth)*.9em);min-width:0;}
+.paper-algorithm .chunks {display:flex;flex-wrap:wrap;align-items:center;gap:.25em .2em;min-width:0;}
+.paper-algorithm .math-run {font-size:22px;display:inline-flex;align-items:center;flex:0 0 auto;max-width:none;min-width:0;}
+.paper-algorithm .text-run {max-width:100%;overflow-wrap:anywhere;}
+.paper-algorithm .formula-svg {flex:none;display:block;overflow:visible;max-width:none;}
+.paper-algorithm .line-note {font-size:15px;line-height:1.55;color:var(--muted-foreground);font-style:normal;margin-top:.35em;overflow-wrap:anywhere;}
+@media(max-width:420px){.paper-algorithm .algorithm-line {grid-template-columns:1.5em minmax(0,1fr);gap:.25em;}.paper-algorithm .operation {padding-inline-start:calc(var(--depth)*.5em);}}
+</style><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" class="glyph-bank"><defs><path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-69" d="M 1690 3834  Q 1690 3699 1597 3603  Q 1504 3507 1376 3507  Q 1235 3507 1152 3600  Q 1069 3693 1069 3846  Q 1069 3994 1155 4090  Q 1242 4186 1370 4186  Q 1498 4186 1594 4080  Q 1690 3974 1690 3834  z M 1421 730  L 1504 659  Q 1235 243 1049 86  Q 864 -70 627 -70  Q 314 -70 314 282  Q 314 467 454 992  L 762 2125  Q 819 2330 819 2406  Q 819 2502 745 2528  Q 672 2554 410 2560  L 410 2662  Q 704 2688 1434 2822  L 1459 2803  L 858 608  Q 794 390 794 326  Q 794 230 883 230  Q 1043 230 1421 730  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-3d" d="M 4077 2048  L 307 2048  L 307 2470  L 4077 2470  L 4077 2048  z M 4077 768  L 307 768  L 307 1190  L 4077 1190  L 4077 768  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-31" d="M 2522 0  L 755 0  L 755 96  Q 1107 115 1235 227  Q 1363 339 1363 608  L 1363 3482  Q 1363 3795 1171 3795  Q 1082 3795 883 3718  L 710 3654  L 710 3744  L 1856 4326  L 1914 4307  L 1914 486  Q 1914 275 2042 185  Q 2170 96 2522 96  L 2522 0  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2c" d="M 531 -902  L 467 -781  Q 998 -422 998 -96  Q 998 -13 909 -13  Q 883 -13 822 -25  Q 762 -38 723 -38  Q 352 -38 352 288  Q 352 454 457 553  Q 563 653 736 653  Q 954 653 1101 496  Q 1248 339 1248 96  Q 1248 -198 1053 -473  Q 858 -749 531 -902  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2026" d="M 5683 275  Q 5683 134 5577 32  Q 5472 -70 5325 -70  Q 5178 -70 5075 32  Q 4973 134 4973 281  Q 4973 429 5078 534  Q 5184 640 5331 640  Q 5472 640 5577 531  Q 5683 422 5683 275  z M 3552 275  Q 3552 134 3446 32  Q 3341 -70 3193 -70  Q 3046 -70 2944 32  Q 2842 134 2842 281  Q 2842 429 2947 534  Q 3053 640 3200 640  Q 3341 640 3446 531  Q 3552 422 3552 275  z M 1421 275  Q 1421 134 1315 32  Q 1210 -70 1062 -70  Q 915 -70 812 32  Q 710 134 710 281  Q 710 429 816 534  Q 922 640 1069 640  Q 1210 640 1315 531  Q 1421 422 1421 275  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-6e" d="M 2944 749  L 3034 666  Q 2707 218 2534 80  Q 2362 -58 2138 -58  Q 2010 -58 1923 28  Q 1837 115 1837 288  Q 1837 390 1939 768  L 2221 1805  Q 2310 2150 2310 2310  Q 2310 2496 2157 2496  Q 1971 2496 1750 2275  Q 1530 2054 1210 1587  Q 998 1274 899 1024  Q 800 774 570 0  L 90 0  L 704 2240  Q 717 2304 717 2349  Q 717 2445 630 2480  Q 544 2515 301 2522  L 301 2624  Q 550 2675 857 2729  Q 1165 2784 1338 2822  L 1363 2810  L 934 1414  Q 1408 2170 1753 2496  Q 2099 2822 2413 2822  Q 2611 2822 2720 2716  Q 2829 2611 2829 2432  Q 2829 2272 2765 2048  L 2406 749  Q 2317 429 2317 358  Q 2317 243 2419 243  Q 2541 243 2810 582  Q 2854 634 2944 749  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-6b" d="M 2950 2739  L 2950 2637  Q 2720 2624 2464 2448  Q 2208 2272 1510 1651  L 1747 1088  Q 2099 262 2266 262  Q 2400 262 2554 531  Q 2586 582 2650 698  L 2746 627  Q 2522 224 2374 77  Q 2227 -70 2035 -70  Q 1894 -70 1782 42  Q 1670 154 1517 454  Q 1325 826 1133 1357  L 877 1152  L 570 0  L 90 0  L 992 3379  Q 1082 3699 1107 3942  Q 1088 4096 781 4096  L 666 4096  L 666 4198  Q 1146 4256 1670 4371  L 1709 4333  L 941 1414  L 1216 1626  Q 2131 2330 2131 2522  Q 2131 2637 1894 2637  L 1805 2637  L 1805 2739  L 2950 2739  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2208" d="M 4000 -173  L 2138 -173  Q 1382 -173 883 355  Q 384 883 384 1612  Q 384 2342 877 2870  Q 1370 3398 2118 3398  L 4000 3398  L 4000 2976  L 2144 2976  Q 1664 2976 1286 2633  Q 909 2291 826 1824  L 4000 1824  L 4000 1402  L 819 1402  Q 902 934 1280 592  Q 1658 250 2138 250  L 4000 250  L 4000 -173  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-7b" d="M 2240 -1088  L 2240 -1158  Q 1702 -1152 1466 -998  Q 1184 -819 1184 -262  L 1184 870  Q 1184 1203 1072 1350  Q 960 1498 640 1600  Q 960 1696 1072 1843  Q 1184 1990 1184 2323  L 1184 3462  Q 1184 4019 1466 4192  Q 1709 4346 2240 4352  L 2240 4282  Q 1907 4198 1782 4025  Q 1658 3853 1658 3494  L 1658 2419  Q 1658 2022 1536 1856  Q 1414 1690 1056 1594  Q 1414 1504 1536 1337  Q 1658 1171 1658 774  L 1658 -301  Q 1658 -659 1782 -832  Q 1907 -1005 2240 -1088  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-4b" d="M 4621 4179  L 4621 4077  Q 4442 4077 4128 3840  L 2221 2400  L 3296 525  Q 3443 269 3552 201  Q 3661 134 3962 102  L 3962 0  L 2202 0  L 2202 102  L 2387 122  Q 2682 147 2682 326  Q 2682 365 2672 409  Q 2662 454 2630 515  Q 2598 576 2579 611  Q 2560 646 2509 736  Q 2458 826 2445 851  L 1658 2227  L 1242 710  Q 1171 467 1171 384  Q 1171 237 1264 182  Q 1357 128 1626 102  L 1626 0  L 45 0  L 45 102  Q 320 134 403 211  Q 486 288 563 557  L 1357 3405  Q 1446 3725 1446 3802  Q 1446 3936 1337 4000  Q 1229 4064 941 4077  L 941 4179  L 2669 4179  L 2669 4077  Q 2400 4058 2253 3958  Q 2106 3859 2035 3603  L 1696 2362  L 2675 3059  Q 3590 3706 3590 3936  Q 3590 4032 3360 4058  L 3206 4077  L 3206 4179  L 4621 4179  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-32" d="M 3034 877  L 2688 0  L 186 0  L 186 77  L 1325 1286  Q 1773 1754 1965 2144  Q 2157 2534 2157 2950  Q 2157 3379 1920 3616  Q 1683 3853 1267 3853  Q 922 3853 720 3673  Q 518 3494 326 3021  L 192 3053  Q 301 3648 630 3987  Q 960 4326 1523 4326  Q 2054 4326 2380 4006  Q 2707 3686 2707 3200  Q 2707 2477 1888 1613  L 832 486  L 2330 486  Q 2541 486 2665 569  Q 2790 653 2944 915  L 3034 877  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-7d" d="M 1888 3456  L 1888 2323  Q 1888 1990 2000 1843  Q 2112 1696 2432 1600  Q 2112 1498 2000 1350  Q 1888 1203 1888 870  L 1888 -269  Q 1888 -826 1606 -998  Q 1363 -1152 832 -1158  L 832 -1088  Q 1165 -1005 1289 -832  Q 1414 -659 1414 -301  L 1414 774  Q 1414 1171 1536 1337  Q 1658 1504 2016 1600  Q 1658 1690 1536 1853  Q 1414 2016 1414 2419  L 1414 3494  Q 1414 3853 1289 4025  Q 1165 4198 832 4282  L 832 4352  Q 1370 4346 1606 4192  Q 1888 4013 1888 3456  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXNonUnicode-Italic-e22f" d="M 3290 896  L 3386 794  Q 3354 742 3309 684  Q 3264 627 3110 476  Q 2957 326 2787 217  Q 2618 109 2346 19  Q 2074 -70 1786 -70  Q 1158 -70 716 298  Q 275 666 275 1402  Q 275 2432 947 3232  Q 1619 4032 2560 4243  Q 2803 4294 2989 4294  Q 3334 4294 3542 4134  Q 3750 3974 3750 3693  Q 3750 3520 3609 3334  Q 3469 3149 3270 3149  Q 3104 3149 3008 3245  Q 2912 3341 2912 3482  Q 2912 3590 2963 3664  Q 3014 3738 3072 3763  Q 3130 3789 3181 3827  Q 3232 3866 3232 3923  Q 3232 3987 3136 4028  Q 3040 4070 2925 4070  Q 2406 4070 1939 3708  Q 1472 3347 1210 2701  Q 960 2074 960 1370  Q 960 787 1251 496  Q 1542 205 1997 205  Q 2637 205 3290 896  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2190" d="M 5485 1408  L 1651 1408  Q 1600 1408 1542 1360  Q 1485 1312 1485 1267  Q 1485 1197 1574 1107  Q 1901 794 2099 493  L 1971 371  Q 1178 1286 454 1587  L 454 1651  Q 1190 1965 1978 2874  L 2106 2752  Q 1926 2496 1581 2138  Q 1491 2048 1491 1958  Q 1491 1830 1658 1830  L 5485 1830  L 5485 1408  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2205" d="M 4512 3731  L 3949 3085  Q 4557 2458 4557 1613  Q 4557 742 3933 118  Q 3309 -506 2438 -506  Q 1754 -506 1178 -83  L 806 -506  L 365 -506  L 922 134  Q 320 749 320 1613  Q 320 2483 944 3107  Q 1568 3731 2438 3731  Q 3098 3731 3699 3309  L 4070 3731  L 4512 3731  z M 3680 2778  L 1453 230  Q 1894 -83 2438 -83  Q 3142 -83 3638 416  Q 4134 915 4134 1619  Q 4134 2272 3680 2778  z M 1203 454  L 3418 2982  Q 3270 3123 2985 3216  Q 2701 3309 2438 3309  Q 1734 3309 1238 2816  Q 742 2323 742 1619  Q 742 928 1203 454  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-79" d="M 1555 1190  L 1690 486  Q 2118 1190 2294 1558  Q 2470 1926 2470 2131  Q 2470 2234 2304 2336  Q 2138 2445 2138 2586  Q 2138 2688 2211 2755  Q 2285 2822 2394 2822  Q 2534 2822 2630 2720  Q 2726 2618 2726 2470  Q 2726 1914 1888 518  Q 1389 -307 918 -812  Q 448 -1318 173 -1318  Q 26 -1318 -64 -1241  Q -154 -1165 -154 -1043  Q -154 -934 -80 -860  Q -6 -787 96 -787  Q 218 -787 314 -876  Q 410 -966 486 -966  Q 602 -966 794 -755  Q 877 -672 1040 -457  Q 1203 -243 1248 -173  Q 1312 -45 1312 51  Q 1312 243 1113 1046  Q 915 1850 787 2176  Q 698 2413 592 2499  Q 486 2586 294 2586  Q 192 2586 96 2560  L 96 2669  Q 237 2694 301 2707  Q 563 2758 986 2822  L 1011 2822  Q 1082 2822 1277 2227  Q 1472 1632 1555 1190  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-28" d="M 1946 -1030  L 1869 -1133  Q 1126 -710 716 32  Q 307 774 307 1613  Q 307 3386 1888 4326  L 1946 4224  Q 1293 3667 1075 3126  Q 858 2586 858 1632  Q 858 685 1082 96  Q 1306 -493 1946 -1030  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-29" d="M 186 4224  L 262 4326  Q 992 3891 1408 3148  Q 1824 2406 1824 1581  Q 1824 -166 243 -1133  L 186 -1030  Q 845 -486 1059 54  Q 1274 595 1274 1562  Q 1274 2534 1059 3120  Q 845 3706 186 4224  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-52" d="M 845 4179  L 2458 4179  Q 3078 4179 3420 3936  Q 3763 3693 3763 3277  Q 3763 2778 3341 2458  Q 3091 2266 2502 2131  L 3072 627  Q 3181 333 3299 217  Q 3418 102 3629 102  L 3629 0  L 2688 0  L 1901 2074  L 1478 2106  L 1126 806  Q 1043 512 1043 403  Q 1043 256 1126 192  Q 1210 128 1472 102  L 1472 0  L -83 0  L -83 102  Q 173 134 278 243  Q 384 352 461 646  L 1222 3405  Q 1299 3699 1299 3808  Q 1299 3923 1210 3987  Q 1133 4038 845 4077  L 845 4179  z M 1958 3795  L 1555 2342  Q 1754 2310 1882 2310  Q 2451 2310 2771 2566  Q 3091 2822 3091 3270  Q 3091 3603 2892 3795  Q 2694 3987 2323 3987  Q 2010 3987 1958 3795  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-43" d="M 4410 4250  L 4173 2970  L 4058 2989  Q 3942 4032 3104 4032  Q 2406 4032 1830 3411  Q 1491 3053 1315 2541  Q 1139 2029 1139 1485  Q 1139 173 2259 173  Q 2656 173 2985 339  Q 3315 506 3725 934  L 3840 838  Q 3411 333 2998 109  Q 2586 -115 2093 -115  Q 1344 -115 883 329  Q 422 774 422 1555  Q 422 2214 748 2812  Q 1075 3411 1619 3795  Q 2272 4262 3021 4262  Q 3462 4262 3770 4154  Q 3898 4109 4032 4109  Q 4205 4109 4275 4250  L 4410 4250  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-3b4" d="M 2944 3866  Q 2944 3744 2883 3651  Q 2822 3558 2694 3558  Q 2579 3558 2508 3606  Q 2438 3654 2403 3721  Q 2368 3789 2323 3856  Q 2278 3923 2179 3971  Q 2080 4019 1920 4019  Q 1715 4019 1516 3916  Q 1318 3814 1318 3648  Q 1318 3482 1484 3328  Q 1651 3174 1942 2985  Q 2234 2797 2381 2656  Q 2605 2445 2701 2249  Q 2797 2054 2797 1709  Q 2797 1037 2313 483  Q 1830 -70 1101 -70  Q 646 -70 400 166  Q 154 403 154 838  Q 154 1453 640 1981  Q 1126 2509 1741 2566  Q 1690 2618 1526 2771  Q 1363 2925 1299 2998  Q 1235 3072 1164 3203  Q 1094 3334 1094 3456  Q 1094 3744 1286 3939  Q 1478 4134 1712 4204  Q 1946 4275 2176 4275  Q 2458 4275 2701 4169  Q 2944 4064 2944 3866  z M 2278 1702  Q 2278 2086 2156 2259  Q 2035 2432 1850 2432  Q 1427 2432 1059 1869  Q 691 1306 691 646  Q 691 384 828 224  Q 966 64 1190 64  Q 1466 64 1728 371  Q 1990 678 2134 1056  Q 2278 1434 2278 1702  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2212" d="M 3974 1408  L 410 1408  L 410 1830  L 3974 1830  L 3974 1408  z " transform="scale(0.015625)" />
+     </defs></svg><hr><ol class="algorithm-lines"><li class="algorithm-line"><span class="line-number" aria-hidden="true">1</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">固定权重、tokenizer、实现版本、解码参数与评测规则</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">2</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">对每个题目 </span><span class="math-run" data-tex="i=1,\ldots,n"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65.0" height="14.0" viewBox="0 0 65 14" version="1.1" class="formula-svg" role="img" aria-label="i=1,\ldots,n" style="width:4.06250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-3d" transform="translate(42.239984 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(125.179965 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(175.17995 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2026" transform="translate(214.619931 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(314.619916 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-6e" transform="translate(354.059897 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">：</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">3</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">对每个预先声明的规则 </span><span class="math-run" data-tex="k\in\{K_1,K_2\}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="79.0" height="14.0" viewBox="0 0 79 14" version="1.1" class="formula-svg" role="img" aria-label="k\in\{K_1,K_2\}" style="width:4.93750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-6b" transform="translate(0 0.703125)" />
+    <use xlink:href="#STIXGeneral-Regular-2208" transform="translate(58.83999 0.703125)" />
+    <use xlink:href="#STIXGeneral-Regular-7b" transform="translate(141.779971 0.703125)" />
+    <use xlink:href="#STIXGeneral-Italic-4b" transform="translate(189.779956 0.703125)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(256.479953 -12.525) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(295.889317 0.703125)" />
+    <use xlink:href="#STIXGeneral-Italic-4b" transform="translate(335.329298 0.703125)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(402.029295 -12.525) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-7d" transform="translate(441.43866 0.703125)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">：</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">4</span><div class="operation" style="--depth:2"><div class="chunks"><span class="text-run">新建状态与空缓存 </span><span class="math-run" data-tex="\mathcal C\leftarrow\varnothing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="41.0" height="13.0" viewBox="0 0 41 13" version="1.1" class="formula-svg" role="img" aria-label="\mathcal C\leftarrow\varnothing" style="width:2.56250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXNonUnicode-Italic-e22f" transform="translate(0 0.90625)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(71.33999 0.90625)" />
+    <use xlink:href="#STIXGeneral-Regular-2205" transform="translate(178.379977 0.90625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">；载入同一题目输入</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">5</span><div class="operation" style="--depth:2"><div class="chunks"><span class="text-run">按规则 </span><span class="math-run" data-tex="k"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.0" height="12.0" viewBox="0 0 8 12" version="1.1" class="formula-svg" role="img" aria-label="k" style="width:0.50000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-6b" transform="translate(0 0.703125)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run"> 执行完整 prefill 与 decode，得到 </span><span class="math-run" data-tex="y_i^{(k)}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.0" height="20.0" viewBox="0 0 22 20" version="1.1" class="formula-svg" role="img" aria-label="y_i^{(k)}" style="width:1.37500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 15) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-79" transform="translate(0 0.971875)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(50.573119 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-6b" transform="translate(73.88311 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(104.963106 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(44.399994 -25.484375) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">6</span><div class="operation" style="--depth:2"><div class="chunks"><span class="text-run">记录 </span><span class="math-run" data-tex="R_i^{(k)}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25.0" height="20.0" viewBox="0 0 25 20" version="1.1" class="formula-svg" role="img" aria-label="R_i^{(k)}" style="width:1.56250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 15) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-52" transform="translate(0 0.971875)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(71.725772 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-6b" transform="translate(95.035764 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(126.115759 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(61.099991 -25.484375) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">、</span><span class="math-run" data-tex="C_i^{(k)}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26.0" height="20.0" viewBox="0 0 26 20" version="1.1" class="formula-svg" role="img" aria-label="C_i^{(k)}" style="width:1.62500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 15) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-43" transform="translate(0 0.971875)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(77.598122 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-6b" transform="translate(100.908113 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(131.988109 45.192188) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(66.699997 -25.484375) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">、输出长度和实际循环轨迹</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">7</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">计算配对差 </span><span class="math-run" data-tex="\delta R_i\leftarrow"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="41.0" height="14.0" viewBox="0 0 41 14" version="1.1" class="formula-svg" role="img" aria-label="\delta R_i\leftarrow" style="width:2.56250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-3b4" transform="translate(0 0.203125)" />
+    <use xlink:href="#STIXGeneral-Italic-52" transform="translate(45.999985 0.203125)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(107.099976 -13.025) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(145.409338 0.203125)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="math-run" data-tex="R_i^{(K_2)}-R_i^{(K_1)}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="79.0" height="20.0" viewBox="0 0 79 20" version="1.1" class="formula-svg" role="img" aria-label="R_i^{(K_2)}-R_i^{(K_1)}" style="width:4.93750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 15) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-52" transform="translate(0 0.464063)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(71.725772 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-4b" transform="translate(95.035764 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(141.725761 35.424688) scale(0.49)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(169.312316 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(61.099991 -25.992187) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2212" transform="translate(211.471679 0.464063)" />
+    <use xlink:href="#STIXGeneral-Italic-52" transform="translate(294.41166 0.464063)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(366.137432 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-4b" transform="translate(389.447424 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(436.137422 35.424688) scale(0.49)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(463.723977 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(355.511651 -25.992187) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">8</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">计算成本差 </span><span class="math-run" data-tex="\delta C_i\leftarrow"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="42.0" height="14.0" viewBox="0 0 42 14" version="1.1" class="formula-svg" role="img" aria-label="\delta C_i\leftarrow" style="width:2.62500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-3b4" transform="translate(0 0.203125)" />
+    <use xlink:href="#STIXGeneral-Italic-43" transform="translate(45.999985 0.203125)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(112.699982 -13.025) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(151.009344 0.203125)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="math-run" data-tex="C_i^{(K_2)}-C_i^{(K_1)}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="81.0" height="20.0" viewBox="0 0 81 20" version="1.1" class="formula-svg" role="img" aria-label="C_i^{(K_2)}-C_i^{(K_1)}" style="width:5.06250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 15) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-43" transform="translate(0 0.464063)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(77.598122 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-4b" transform="translate(100.908113 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(147.598111 35.424688) scale(0.49)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(175.184666 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(66.699997 -25.992187) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2212" transform="translate(217.344029 0.464063)" />
+    <use xlink:href="#STIXGeneral-Italic-43" transform="translate(300.28401 0.464063)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(377.882132 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-4b" transform="translate(401.192124 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(447.882121 35.424688) scale(0.49)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(475.468676 44.684375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-69" transform="translate(366.984007 -25.992187) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">9</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">按题目汇总配对差和成本分布；多采样结果仍以题目为重采样单位</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">10</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">以独立确认集比较固定策略与可部署选择器，报告共同预算下的表现</span></div><div class="line-note">逐题事后取最大正确率只作 oracle 参照，不记为门控成绩。</div></div></li></ol><hr><script type="application/json" class="algorithm-source">{"key": "posttrain_depth_diagnostic", "title": "固定检查点的深度收益配对诊断", "input": "独立题目集、冻结检查点、两个预先指定的深度规则 K₁ 与 K₂、同一解码规则和成本测量协议。", "output": "逐题输出、奖励与成本，配对差值及其不确定性；供比较准确率与实际成本使用。", "assumptions": "这是诊断协议，不更新参数。两种深度未必等成本；最终按实测成本比较。若采用随机文字采样，记录初态随机量，并使用按题目和文字位置索引的公共随机数，避免增加循环次数改变其他随机数的消耗顺序。", "lines": [{"depth": 0, "chunks": [{"t": "固定权重、tokenizer、实现版本、解码参数与评测规则"}]}, {"depth": 0, "chunks": [{"t": "对每个题目 "}, {"m": "i=1,\\ldots,n"}, {"t": "："}]}, {"depth": 1, "chunks": [{"t": "对每个预先声明的规则 "}, {"m": "k\\in\\{K_1,K_2\\}"}, {"t": "："}]}, {"depth": 2, "chunks": [{"t": "新建状态与空缓存 "}, {"m": "\\mathcal C\\leftarrow\\varnothing"}, {"t": "；载入同一题目输入"}]}, {"depth": 2, "chunks": [{"t": "按规则 "}, {"m": "k"}, {"t": " 执行完整 prefill 与 decode，得到 "}, {"m": "y_i^{(k)}"}]}, {"depth": 2, "chunks": [{"t": "记录 "}, {"m": "R_i^{(k)}"}, {"t": "、"}, {"m": "C_i^{(k)}"}, {"t": "、输出长度和实际循环轨迹"}]}, {"depth": 1, "chunks": [{"t": "计算配对差 "}, {"m": "\\delta R_i\\leftarrow"}, {"m": "R_i^{(K_2)}-R_i^{(K_1)}"}]}, {"depth": 1, "chunks": [{"t": "计算成本差 "}, {"m": "\\delta C_i\\leftarrow"}, {"m": "C_i^{(K_2)}-C_i^{(K_1)}"}]}, {"depth": 0, "chunks": [{"t": "按题目汇总配对差和成本分布；多采样结果仍以题目为重采样单位"}]}, {"depth": 0, "chunks": [{"t": "以独立确认集比较固定策略与可部署选择器，报告共同预算下的表现"}], "note": "逐题事后取最大正确率只作 oracle 参照，不记为门控成绩。"}], "after_note": "这里比较两种完整部署策略。若要估计单个中间状态的续算价值，应从同一合法状态分叉、隔离缓存副作用并固定后续策略；分叉计算属于诊断成本。"}</script></section>

@@ -9,7 +9,9 @@
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "verify": "node scripts/verify.mjs",
-    "validate": "npm run check && npm run build && npm run verify",
+    "validate": "npm run check:research && npm run check && npm run build && npm run verify",
+    "sync:research": "node scripts/sync-research.mjs",
+    "check:research": "node scripts/sync-research.mjs --check",
     "build:review": "astro build --mode review"
   },
   "dependencies": {

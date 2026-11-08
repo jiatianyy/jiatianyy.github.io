@@ -3,8 +3,17 @@ import Base from '../../layouts/Base.astro';
 import PageHeading from '../../components/PageHeading.astro';
 import { getNotes, isReview } from '../../data/notes';
 const notes = await getNotes();
+const research = notes.filter(note => note.data.series === 'loop-reasoning');
+const otherNotes = notes.filter(note => note.data.series !== 'loop-reasoning');
+const groups = [
+  { title: '研究入口与课程', ids: ['overview', 'model-matrix', 'architecture', 'pretraining', 'posttraining'] },
+  { title: '七篇论文专页', ids: ['huginn', 'ouro', 'done-right-i', 'loopie', 'smelt', 'loopmoe', 'tah2'] },
+  { title: '后训练工程与研究设想', ids: ['engineering', 'data', 'parameter-update', 'internal-loop', 'generation', 'offline-distillation', 'online-distillation', 'reinforcement-learning', 'systems-evaluation', 'framework', 'research-ideas', 'full-cot'] },
+];
 ---
 <Base title="Research Notes"><PageHeading label="Research Notes / The notebook" title="Thinking, in the open." description="A space for reading notes, mathematical derivations, and reproducible experiments. Entries appear publicly only after review." />
 {isReview && <div class="review-banner">Local review mode · Drafts and demonstration entries are visible here. They are excluded from the production build.</div>}
-{notes.length ? <div class="note-list">{notes.map(note => <a class="note-entry" href={`/notes/${note.id}/`}><span class="label">{note.data.kind === 'demo' ? 'Technical demo · not a research result' : note.data.draft || !note.data.approved ? 'Draft · awaiting review' : 'Research note'}</span><h2>{note.data.title} ↗</h2><p>{note.data.description}</p></a>)}</div> : <div class="empty-state"><span class="eyebrow">Awaiting first entry</span><h2>No reviewed notes yet.</h2><p>Research notes will appear here once the author has reviewed and approved them.</p></div>}
+{research.length > 0 && <section class="research-catalog" lang="zh-CN"><p class="eyebrow">Loop & Hybrid Reasoning / 研究资料</p><h2>循环推理研究总览</h2><p>从计算结构、训练目标到生成与评测。24 篇完整笔记，保留原页来源、公式、算法和待验收事项。</p>{groups.map(group => <section><h3>{group.title}</h3><ul>{group.ids.map(id => research.find(note => note.id === `loop-reasoning/${id}`)).filter((note): note is NonNullable<typeof note> => Boolean(note)).map(note => <li><a href={`/notes/${note.id}/`}>{note.data.title} <span aria-hidden="true">↗</span></a></li>)}</ul></section>)}</section>}
+{otherNotes.length > 0 && <div class="note-list">{otherNotes.map(note => <a class="note-entry" href={`/notes/${note.id}/`}><span class="label">{note.data.kind === 'demo' ? 'Technical demo · not a research result' : note.data.draft || !note.data.approved ? 'Draft · awaiting review' : 'Research note'}</span><h2>{note.data.title} ↗</h2><p>{note.data.description}</p></a>)}</div>}
+{notes.length === 0 && <div class="empty-state"><span class="eyebrow">Awaiting first entry</span><h2>No reviewed notes yet.</h2><p>Research notes will appear here once the author has reviewed and approved them.</p></div>}
 </Base>
