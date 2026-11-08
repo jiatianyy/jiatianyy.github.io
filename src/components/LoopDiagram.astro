@@ -1,0 +1,15 @@
+<figure class="loop-figure" aria-label="Conceptual illustration of a shared computation repeated across steps">
+  <div class="diagram-top"><span class="eyebrow">A recurring question</span><span class="figure-index">FIG. 01</span></div>
+  <svg viewBox="0 0 460 280" role="img" aria-labelledby="loop-title">
+    <title id="loop-title">An input passes through a shared transformer block, loops back for another step, and produces an output.</title>
+    <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" /></marker></defs>
+    <g fill="none" stroke="currentColor" stroke-width="1.4" class="diagram-lines">
+      <path d="M40 160 H137" marker-end="url(#arrow)"/><path d="M316 160 H416" marker-end="url(#arrow)"/>
+      <rect x="143" y="117" width="171" height="86" rx="8"/>
+      <path d="M274 117 V67 Q274 51 257 51 H196 Q179 51 179 67 V111" marker-end="url(#arrow)"/>
+      <circle cx="40" cy="160" r="4" fill="currentColor"/><circle cx="422" cy="160" r="4" fill="currentColor"/>
+    </g>
+    <g fill="currentColor" font-size="13" font-family="monospace"><text x="22" y="193">input</text><text x="398" y="193">output</text><text x="229" y="154" text-anchor="middle">shared</text><text x="229" y="176" text-anchor="middle">transformer</text><text x="294" y="62">repeat</text><text x="229" y="244" text-anchor="middle" opacity=".65">h(t+1) = fθ(h(t), x)</text></g>
+  </svg>
+  <figcaption>More steps. Shared parameters.<br /><em>A conceptual view of iterative computation.</em></figcaption>
+</figure>

@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeading from '../../components/PageHeading.astro';
+import { getNotes, isReview } from '../../data/notes';
+const notes = await getNotes();
+---
+<Base title="Research Notes"><PageHeading label="Research Notes / The notebook" title="Thinking, in the open." description="A space for reading notes, mathematical derivations, and reproducible experiments. Entries appear publicly only after review." />
+{isReview && <div class="review-banner">Local review mode · Drafts and demonstration entries are visible here. They are excluded from the production build.</div>}
+{notes.length ? <div class="note-list">{notes.map(note => <a class="note-entry" href={`/notes/${note.id}/`}><span class="label">{note.data.kind === 'demo' ? 'Technical demo · not a research result' : note.data.draft || !note.data.approved ? 'Draft · awaiting review' : 'Research note'}</span><h2>{note.data.title} ↗</h2><p>{note.data.description}</p></a>)}</div> : <div class="empty-state"><span class="eyebrow">Awaiting first entry</span><h2>No reviewed notes yet.</h2><p>Research notes will appear here once the author has reviewed and approved them.</p></div>}
+</Base>
