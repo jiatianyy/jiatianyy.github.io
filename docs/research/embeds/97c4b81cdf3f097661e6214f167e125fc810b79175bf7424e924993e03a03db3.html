@@ -1,0 +1,13 @@
+<section id="sink-mass-algorithm" lang="zh-CN" aria-label="固定KV的sink质量干预参考算法"><style>#sink-mass-algorithm{color:var(--foreground);font-family:inherit;font-size:18px;line-height:1.65;min-width:0;width:100%;}#sink-mass-algorithm ol{list-style:none;margin:0;padding:0;}#sink-mass-algorithm li{display:grid;grid-template-columns:2em minmax(0,1fr);gap:.55em;align-items:start;margin:.6em 0;min-width:0;}#sink-mass-algorithm .n{font-size:15px;text-align:right;color:var(--muted-foreground);font-variant-numeric:tabular-nums;}#sink-mass-algorithm .op{overflow-wrap:anywhere;min-width:0;}@media(max-width:420px){#sink-mass-algorithm li{grid-template-columns:1.5em minmax(0,1fr);gap:.25em;}}</style><ol><li><span class="n">1</span><span class="op">关闭attention dropout，固定权重、随机性、前缀和teacher-forced目标，创建相互独立的缓存快照。</span></li>
+<li><span class="n">2</span><span class="op">对齐query、head、物理层和visit；用文档边界识别所属segment的起点。</span></li>
+<li><span class="n">3</span><span class="op">只读取合法causal keys上的attention概率及value，保留原始记录。</span></li>
+<li><span class="n">4</span><span class="op">若起点质量为1，记录条件分布未定义并跳过此项干预。</span></li>
+<li><span class="n">5</span><span class="op">计算非起点条件均值，核对两次visit输出的三项分解。</span></li>
+<li><span class="n">6</span><span class="op">按预先声明的方案指定[0,1]内的目标起点质量，不按答案挑选最优值。</span></li>
+<li><span class="n">7</span><span class="op">保持Q、K、V不变，在softmax之后改写起点质量并等比例缩放其余概率。</span></li>
+<li><span class="n">8</span><span class="op">核对概率非负、总和为1，以及局部输出差的精确恒等式。</span></li>
+<li><span class="n">9</span><span class="op">将新head输出送回原输出投影对应head的列块、残差与后缀；仅更新该分支的独立状态。</span></li>
+<li><span class="n">10</span><span class="op">在共同目标上计算配对loss差，同时运行目标质量等于原值的无操作对照。</span></li>
+<li><span class="n">11</span><span class="op">把质量干预与更换value、冻结专家等其他干预分别登记。</span></li>
+<li><span class="n">12</span><span class="op">按预定query／head集合聚合，保存选择方式、跳过项、容差和缓存身份。</span></li>
+<li><span class="n">13</span><span class="op">输出局部算术核对与任务效应；未运行模型时仅报告前者。</span></li></ol></section>

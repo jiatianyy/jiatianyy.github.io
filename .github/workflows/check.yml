@@ -1,0 +1,21 @@
+name: Validate website
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches-ignore: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run build:review
+      - run: node scripts/verify.mjs --review

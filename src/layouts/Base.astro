@@ -1,0 +1,34 @@
+---
+import '../styles/global.css';
+import 'katex/dist/katex.min.css';
+import { profile } from '../data/site';
+interface Props { title?: string; description?: string; lang?: string; }
+const { title, description = profile.description, lang = 'en' } = Astro.props;
+const nav = [['/', 'Home'], ['/research/', 'Research'], ['/publications/', 'Publications'], ['/notes/', 'Research Notes'], ['/projects/', 'Projects'], ['/about/', 'About / CV']];
+const active = Astro.url.pathname;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ? `${title} — ${profile.name}` : `${profile.name} — Research & Notes`}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#f7f8f3" />
+    <meta property="og:title" content={title ? `${title} — ${profile.name}` : profile.name} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {(import.meta.env.DEV || import.meta.env.MODE === 'review') && <meta name="robots" content="noindex, nofollow" />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="/" aria-label="Jiatian Yuan home"><span class="monogram">jy</span><span>Jiatian Yuan<span class="brand-caption">Research & notes</span></span></a>
+      <nav aria-label="Main navigation">{nav.map(([href, label]) => <a href={href} aria-current={(href === '/' ? active === '/' : active.startsWith(href)) ? 'page' : undefined}>{label}</a>)}</nav>
+    </header>
+    <main id="main" class="wrap"><slot /></main>
+    <footer class="site-footer wrap"><div><strong>Jiatian Yuan</strong><p>Questions, experiments, and ideas in progress.</p></div><div class="footer-meta"><a href={profile.github}>GitHub ↗</a><span>© {new Date().getFullYear()} · Built with Astro</span></div></footer>
+  </body>
+</html>

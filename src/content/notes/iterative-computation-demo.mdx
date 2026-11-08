@@ -1,0 +1,54 @@
+---
+title: "A small example of iterative computation"
+description: "A technical demo of equations, highlighted code, references, and an article table of contents."
+draft: true
+approved: false
+kind: demo
+date: 2026-11-08
+references:
+  - id: universal-transformers
+    title: "Dehghani et al. — Universal Transformers (2018)"
+    url: "https://arxiv.org/abs/1807.03819"
+    bibtex: |
+      @misc{dehghani2018universal,
+        title={Universal Transformers},
+        author={Mostafa Dehghani and Stephan Gouws and Oriol Vinyals and Jakob Uszkoreit and Lukasz Kaiser},
+        year={2018},
+        eprint={1807.03819},
+        archivePrefix={arXiv}
+      }
+---
+
+This is a **website feature demonstration**, not a report of original research or an implementation of a particular paper.
+
+## A shared update
+
+An iterative computation applies the same update rule several times. Let $h_t$ be a state, $x$ an input, and $f_\theta$ an update function with shared parameters:
+
+$$
+h_{t+1} = f_\theta(h_t, x), \qquad t = 0, \ldots, T-1.
+$$
+
+This notation describes repeated computation. It does not, by itself, imply improved reasoning or better efficiency. Universal Transformers is one relevant reading reference [1](#ref-universal-transformers).
+
+## A minimal code example
+
+The following TypeScript function illustrates repetition only; it is not a transformer implementation.
+
+```ts
+function iterate<T>(initial: T, update: (state: T) => T, steps: number): T {
+  let state = initial;
+  for (let t = 0; t < steps; t++) state = update(state);
+  return state;
+}
+
+const result = iterate(1, x => x * 2, 3); // 8
+```
+
+## Questions to investigate
+
+- How should the number of iterations be selected?
+- What information needs to persist between iterations?
+- How should training and inference compute be compared?
+
+These are illustrative questions. No experimental results are asserted here.

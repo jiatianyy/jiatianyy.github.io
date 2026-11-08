@@ -1,0 +1,8 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeading from '../components/PageHeading.astro';
+import { directions } from '../data/site';
+---
+<Base title="Research"><PageHeading label="Research / Areas of interest" title="Learning to think, step by step." description="Three directions for organizing questions about language models. These are research interests, rather than claims of completed work." />
+<div class="research-list">{directions.map(d => <section class="research-row" id={d.id}><span class="research-number">{d.number}</span><div><p class="eyebrow">{d.tag}</p><h2>{d.title}</h2><p class="research-question">{d.question}</p><p>{d.description}</p><div class="placeholder">Specific projects, methods, and results: to be added after review.</div></div></section>)}</div>
+</Base>

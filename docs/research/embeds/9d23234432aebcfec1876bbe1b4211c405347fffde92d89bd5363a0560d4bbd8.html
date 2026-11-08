@@ -1,0 +1,297 @@
+<section id="HG2" class="paper-algorithm" lang="zh-CN" aria-label="Huginn 单样本逐轮 KL 退出"><style>
+.paper-algorithm {color:var(--foreground);font-family:inherit;font-size:18px;line-height:1.65;width:100%;min-width:0;}
+.paper-algorithm strong {font-weight:500;}
+.paper-algorithm .glyph-bank {position:absolute;pointer-events:none;}
+.paper-algorithm hr {border:0;border-top:1px solid var(--border);margin:1em 0;}
+.paper-algorithm .algorithm-lines {list-style:none;margin:0;padding:0;}
+.paper-algorithm .algorithm-line {display:grid;grid-template-columns:2em minmax(0,1fr);gap:.55em;margin:.6em 0;align-items:start;min-width:0;}
+.paper-algorithm .line-number {font-size:14px;text-align:right;color:var(--muted-foreground);font-variant-numeric:tabular-nums;padding-top:.32em;}
+.paper-algorithm .operation {padding-inline-start:calc(var(--depth)*.9em);min-width:0;}
+.paper-algorithm .chunks {display:flex;flex-wrap:wrap;align-items:center;gap:.25em .2em;min-width:0;}
+.paper-algorithm .math-run {font-size:22px;display:inline-flex;align-items:center;flex:0 0 auto;max-width:none;min-width:0;}
+.paper-algorithm .text-run {max-width:100%;overflow-wrap:anywhere;}
+.paper-algorithm .formula-svg {flex:none;display:block;overflow:visible;max-width:none;}
+.paper-algorithm .line-note {font-size:15px;line-height:1.55;color:var(--muted-foreground);font-style:normal;margin-top:.35em;overflow-wrap:anywhere;}
+@media(max-width:420px){.paper-algorithm .algorithm-line {grid-template-columns:1.5em minmax(0,1fr);gap:.25em;}.paper-algorithm .operation {padding-inline-start:calc(var(--depth)*.5em);}}
+</style><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" class="glyph-bank"><defs><path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-73" d="M 2342 2829  L 2214 1933  L 2112 1933  Q 2022 2675 1542 2675  Q 1370 2675 1267 2579  Q 1165 2483 1165 2310  Q 1165 2067 1510 1658  Q 1946 1152 1946 787  Q 1946 397 1686 163  Q 1427 -70 1024 -70  Q 838 -70 672 -6  Q 538 51 390 51  Q 262 51 205 -83  L 102 -83  L 230 934  L 333 934  Q 461 64 973 64  Q 1203 64 1331 192  Q 1459 320 1459 557  Q 1459 845 1101 1293  Q 698 1798 698 2131  Q 698 2451 909 2636  Q 1120 2822 1472 2822  Q 1600 2822 1830 2758  Q 1971 2714 2061 2714  Q 2189 2714 2253 2829  L 2342 2829  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-70" d="M 1376 2739  L 1190 2099  Q 1670 2822 2285 2822  Q 2637 2822 2829 2611  Q 3021 2400 3021 2022  Q 3021 1235 2422 582  Q 1824 -70 1120 -70  Q 890 -70 678 38  Q 422 -1018 422 -1024  Q 422 -1126 508 -1168  Q 595 -1210 819 -1210  L 819 -1312  L -480 -1312  L -480 -1210  Q -275 -1203 -188 -1120  Q -102 -1037 -45 -806  L 691 1958  Q 794 2330 794 2413  Q 794 2586 512 2586  L 371 2586  L 358 2682  L 1357 2822  Q 1389 2822 1389 2797  Q 1382 2765 1376 2739  z M 2445 2003  Q 2445 2285 2352 2416  Q 2259 2547 2048 2547  Q 1798 2547 1548 2329  Q 1299 2112 1184 1818  Q 1043 1453 905 953  Q 768 454 768 294  Q 768 186 854 118  Q 941 51 1075 51  Q 1574 51 2003 659  Q 2445 1274 2445 2003  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-70" d="M 1018 2931  L 1018 2438  Q 1421 2944 1939 2944  Q 2406 2944 2707 2560  Q 3008 2176 3008 1581  Q 3008 883 2621 409  Q 2234 -64 1664 -64  Q 1466 -64 1328 -6  Q 1190 51 1018 211  L 1018 -794  Q 1018 -1094 1120 -1180  Q 1222 -1267 1581 -1274  L 1581 -1389  L 32 -1389  L 32 -1280  Q 314 -1254 397 -1171  Q 480 -1088 480 -838  L 480 2157  Q 480 2381 429 2451  Q 378 2522 218 2522  Q 115 2522 58 2515  L 58 2618  Q 506 2752 979 2944  L 1018 2931  z M 1018 2138  L 1018 563  Q 1018 422 1238 281  Q 1459 141 1683 141  Q 2029 141 2243 467  Q 2458 794 2458 1325  Q 2458 1888 2243 2224  Q 2029 2560 1670 2560  Q 1446 2560 1232 2419  Q 1018 2278 1018 2138  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-72" d="M 1024 2931  L 1024 2342  Q 1267 2688 1430 2816  Q 1594 2944 1792 2944  Q 1958 2944 2051 2854  Q 2144 2765 2144 2605  Q 2144 2470 2077 2393  Q 2010 2317 1894 2317  Q 1773 2317 1638 2445  Q 1536 2541 1472 2541  Q 1338 2541 1181 2355  Q 1024 2170 1024 2016  L 1024 576  Q 1024 301 1133 205  Q 1242 109 1568 96  L 1568 0  L 32 0  L 32 96  Q 339 154 412 224  Q 486 294 486 538  L 486 2138  Q 486 2349 438 2435  Q 390 2522 269 2522  Q 166 2522 45 2496  L 45 2598  Q 448 2726 992 2944  L 1024 2931  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-65" d="M 2611 1050  L 2714 1005  Q 2330 -64 1376 -64  Q 813 -64 486 329  Q 160 723 160 1389  Q 160 2074 525 2509  Q 890 2944 1485 2944  Q 2061 2944 2374 2502  Q 2560 2246 2592 1773  L 621 1773  Q 646 1370 700 1158  Q 755 947 915 730  Q 1184 378 1626 378  Q 1939 378 2153 531  Q 2368 685 2611 1050  z M 634 1978  L 1939 1978  Q 1882 2381 1750 2547  Q 1619 2714 1312 2714  Q 1043 2714 864 2525  Q 685 2336 634 1978  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-76" d="M 3053 2880  L 3053 2784  Q 2906 2771 2835 2688  Q 2765 2605 2637 2285  L 1818 230  Q 1690 -90 1638 -90  Q 1587 -90 1523 77  Q 1510 96 1497 141  Q 1485 186 1472 211  L 704 2048  Q 499 2534 403 2652  Q 307 2771 122 2784  L 122 2880  L 1376 2880  L 1376 2784  Q 1210 2771 1146 2732  Q 1082 2694 1082 2611  Q 1082 2509 1139 2368  L 1792 730  L 2426 2387  Q 2464 2483 2464 2579  Q 2464 2758 2163 2784  L 2163 2880  L 3053 2880  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-28" d="M 1946 -1030  L 1869 -1133  Q 1126 -710 716 32  Q 307 774 307 1613  Q 307 3386 1888 4326  L 1946 4224  Q 1293 3667 1075 3126  Q 858 2586 858 1632  Q 858 685 1082 96  Q 1306 -493 1946 -1030  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-76" d="M 1325 448  L 1523 653  Q 1869 1005 2134 1456  Q 2400 1907 2400 2131  Q 2400 2208 2285 2317  Q 2125 2458 2125 2605  Q 2125 2701 2195 2761  Q 2266 2822 2368 2822  Q 2522 2822 2624 2704  Q 2726 2586 2726 2445  Q 2726 2074 2323 1453  Q 1971 909 1562 474  Q 1504 416 1421 326  Q 1338 237 1299 192  Q 1261 147 1200 86  Q 1139 26 1110 -3  Q 1082 -32 1043 -64  Q 1005 -96 979 -105  Q 954 -115 928 -115  Q 870 -115 870 58  L 870 211  Q 870 1094 717 1990  Q 653 2355 579 2470  Q 506 2586 326 2586  Q 198 2586 128 2579  L 128 2662  Q 480 2720 845 2797  Q 915 2822 973 2822  Q 1011 2822 1033 2739  Q 1056 2656 1165 2093  Q 1280 1510 1325 448  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-29" d="M 186 4224  L 262 4326  Q 992 3891 1408 3148  Q 1824 2406 1824 1581  Q 1824 -166 243 -1133  L 186 -1030  Q 845 -486 1059 54  Q 1274 595 1274 1562  Q 1274 2534 1059 3120  Q 845 3706 186 4224  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2190" d="M 5485 1408  L 1651 1408  Q 1600 1408 1542 1360  Q 1485 1312 1485 1267  Q 1485 1197 1574 1107  Q 1901 794 2099 493  L 1971 371  Q 1178 1286 454 1587  L 454 1651  Q 1190 1965 1978 2874  L 2106 2752  Q 1926 2496 1581 2138  Q 1491 2048 1491 1958  Q 1491 1830 1658 1830  L 5485 1830  L 5485 1408  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-31" d="M 2522 0  L 755 0  L 755 96  Q 1107 115 1235 227  Q 1363 339 1363 608  L 1363 3482  Q 1363 3795 1171 3795  Q 1082 3795 883 3718  L 710 3654  L 710 3744  L 1856 4326  L 1914 4307  L 1914 486  Q 1914 275 2042 185  Q 2170 96 2522 96  L 2522 0  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2f" d="M 1837 4326  L 378 -90  L -58 -90  L 1408 4326  L 1837 4326  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-56" d="M 4403 4179  L 4403 4077  Q 4198 4070 4045 3821  L 1658 -115  L 1536 -115  L 1011 3104  Q 902 3776 828 3910  Q 755 4045 486 4077  L 486 4179  L 2022 4179  L 2022 4077  Q 1722 4045 1629 3981  Q 1536 3917 1536 3750  Q 1536 3686 1542 3654  L 1958 819  L 3302 3123  Q 3616 3661 3616 3859  Q 3616 4032 3219 4077  L 3219 4179  L 4403 4179  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-72" d="M 1126 1427  L 1229 1651  Q 1446 2131 1830 2534  Q 2106 2822 2336 2822  Q 2470 2822 2553 2732  Q 2637 2643 2637 2496  Q 2637 2349 2557 2249  Q 2477 2150 2336 2150  Q 2214 2150 2112 2317  Q 2061 2406 2010 2406  Q 1837 2406 1485 1805  Q 1267 1434 1136 1104  Q 1005 774 774 0  L 288 0  L 806 1869  Q 909 2246 909 2394  Q 909 2560 666 2560  Q 614 2560 467 2541  L 467 2650  L 1459 2822  L 1478 2810  L 1126 1427  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-3d" d="M 4077 2048  L 307 2048  L 307 2470  L 4077 2470  L 4077 2048  z M 4077 768  L 307 768  L 307 1190  L 4077 1190  L 4077 768  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2c" d="M 531 -902  L 467 -781  Q 998 -422 998 -96  Q 998 -13 909 -13  Q 883 -13 822 -25  Q 762 -38 723 -38  Q 352 -38 352 288  Q 352 454 457 553  Q 563 653 736 653  Q 954 653 1101 496  Q 1248 339 1248 96  Q 1248 -198 1053 -473  Q 858 -749 531 -902  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2026" d="M 5683 275  Q 5683 134 5577 32  Q 5472 -70 5325 -70  Q 5178 -70 5075 32  Q 4973 134 4973 281  Q 4973 429 5078 534  Q 5184 640 5331 640  Q 5472 640 5577 531  Q 5683 422 5683 275  z M 3552 275  Q 3552 134 3446 32  Q 3341 -70 3193 -70  Q 3046 -70 2944 32  Q 2842 134 2842 281  Q 2842 429 2947 534  Q 3053 640 3200 640  Q 3341 640 3446 531  Q 3552 422 3552 275  z M 1421 275  Q 1421 134 1315 32  Q 1210 -70 1062 -70  Q 915 -70 812 32  Q 710 134 710 281  Q 710 429 816 534  Q 922 640 1069 640  Q 1210 640 1315 531  Q 1421 422 1421 275  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-52" d="M 845 4179  L 2458 4179  Q 3078 4179 3420 3936  Q 3763 3693 3763 3277  Q 3763 2778 3341 2458  Q 3091 2266 2502 2131  L 3072 627  Q 3181 333 3299 217  Q 3418 102 3629 102  L 3629 0  L 2688 0  L 1901 2074  L 1478 2106  L 1126 806  Q 1043 512 1043 403  Q 1043 256 1126 192  Q 1210 128 1472 102  L 1472 0  L -83 0  L -83 102  Q 173 134 278 243  Q 384 352 461 646  L 1222 3405  Q 1299 3699 1299 3808  Q 1299 3923 1210 3987  Q 1133 4038 845 4077  L 845 4179  z M 1958 3795  L 1555 2342  Q 1754 2310 1882 2310  Q 2451 2310 2771 2566  Q 3091 2822 3091 3270  Q 3091 3603 2892 3795  Q 2694 3987 2323 3987  Q 2010 3987 1958 3795  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-6d" d="M 4960 0  L 3565 0  L 3565 96  Q 3834 122 3907 208  Q 3981 294 3981 576  L 3981 1894  Q 3981 2278 3869 2444  Q 3757 2611 3488 2611  Q 3264 2611 3107 2521  Q 2950 2432 2803 2221  L 2803 608  Q 2803 301 2896 201  Q 2989 102 3264 96  L 3264 0  L 1830 0  L 1830 96  Q 2112 115 2189 188  Q 2266 262 2266 550  L 2266 1901  Q 2266 2611 1850 2611  Q 1670 2611 1468 2531  Q 1267 2451 1171 2336  Q 1088 2240 1088 2227  L 1088 448  Q 1088 243 1177 176  Q 1267 109 1523 96  L 1523 0  L 102 0  L 102 96  Q 371 102 460 195  Q 550 288 550 563  L 550 2150  Q 550 2387 499 2480  Q 448 2573 326 2573  Q 230 2573 122 2547  L 122 2656  Q 557 2778 1011 2944  L 1062 2925  L 1062 2451  L 1075 2451  Q 1363 2752 1584 2848  Q 1805 2944 2054 2944  Q 2560 2944 2733 2406  Q 3232 2944 3776 2944  Q 4518 2944 4518 1792  L 4518 493  Q 4518 282 4582 202  Q 4646 122 4794 109  L 4960 96  L 4960 0  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-61" d="M 2829 422  L 2829 243  Q 2586 -64 2253 -64  Q 1888 -64 1843 403  L 1837 403  Q 1427 -64 909 -64  Q 608 -64 422 112  Q 237 288 237 602  Q 237 1050 685 1350  Q 992 1555 1837 1869  L 1837 2214  Q 1837 2502 1699 2646  Q 1562 2790 1338 2790  Q 1146 2790 1018 2697  Q 890 2605 890 2477  Q 890 2419 909 2348  Q 928 2278 928 2208  Q 928 2112 841 2029  Q 755 1946 634 1946  Q 525 1946 441 2029  Q 358 2112 358 2240  Q 358 2547 685 2752  Q 986 2944 1421 2944  Q 1939 2944 2176 2656  Q 2291 2522 2323 2384  Q 2355 2246 2355 1946  L 2355 723  Q 2355 301 2554 301  Q 2682 301 2829 422  z M 1837 813  L 1837 1715  Q 1248 1510 1018 1293  Q 800 1094 800 800  Q 800 557 921 432  Q 1043 307 1242 307  Q 1453 307 1613 410  Q 1747 506 1792 589  Q 1837 672 1837 813  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-78" d="M 3066 0  L 1779 0  L 1779 96  Q 1939 109 1987 137  Q 2035 166 2035 250  Q 2035 307 1997 365  L 1414 1261  L 909 474  Q 781 275 781 211  Q 781 96 1037 96  L 1037 0  L 109 0  L 109 96  Q 269 109 355 169  Q 442 230 576 422  L 1306 1478  L 704 2400  Q 557 2624 454 2704  Q 352 2784 211 2784  L 154 2784  L 154 2880  L 1478 2880  L 1478 2784  Q 1203 2778 1203 2643  Q 1203 2509 1498 2074  Q 1581 1958 1587 1946  Q 1619 1990 1779 2227  Q 1811 2285 1856 2349  Q 1901 2413 1923 2451  Q 1946 2490 1971 2528  Q 1997 2566 2006 2595  Q 2016 2624 2016 2643  Q 2016 2765 1760 2784  L 1760 2880  L 2771 2880  L 2771 2784  Q 2445 2771 2253 2502  L 1722 1734  L 2541 480  Q 2790 96 3066 96  L 3066 0  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-41" d="M 3610 0  L 2042 0  L 2042 102  Q 2330 115 2432 192  Q 2534 269 2534 442  Q 2534 493 2522 608  L 2394 1446  L 986 1446  L 608 736  Q 467 474 467 314  Q 467 122 864 102  L 864 0  L -326 0  L -326 102  Q -109 147 28 307  Q 166 467 531 1101  L 2355 4275  L 2522 4275  L 3110 736  Q 3174 339 3264 230  Q 3354 122 3610 102  L 3610 0  z M 2362 1677  L 2074 3360  L 1120 1677  L 2362 1677  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2b" d="M 4070 1408  L 2400 1408  L 2400 -262  L 1978 -262  L 1978 1408  L 307 1408  L 307 1830  L 1978 1830  L 1978 3501  L 2400 3501  L 2400 1830  L 4070 1830  L 4070 1408  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-65" d="M 2291 698  L 2368 621  Q 1805 -70 1062 -70  Q 672 -70 435 170  Q 198 410 198 806  Q 198 1555 796 2188  Q 1395 2822 2112 2822  Q 2362 2822 2499 2707  Q 2637 2592 2637 2387  Q 2637 1965 2147 1632  Q 1658 1299 819 1190  Q 755 1062 755 800  Q 755 538 918 378  Q 1082 218 1350 218  Q 1562 218 1754 317  Q 1946 416 2291 698  z M 973 1613  L 864 1331  Q 1581 1504 1894 1805  Q 2214 2112 2214 2426  Q 2214 2675 1990 2675  Q 1722 2675 1430 2364  Q 1139 2054 973 1613  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-2113" d="M 493 2490  L 582 2656  Q 813 2496 1184 2496  Q 1728 3296 2301 3846  Q 2874 4397 3245 4397  Q 3654 4397 3654 3968  Q 3654 3450 3036 2938  Q 2419 2426 1594 2304  Q 678 826 678 397  Q 678 122 909 122  Q 1120 122 1398 365  Q 1677 608 2182 1190  L 2317 1082  Q 1773 448 1462 189  Q 1152 -70 864 -70  Q 627 -70 467 74  Q 307 218 307 486  Q 307 1024 800 1882  Q 877 2022 1056 2304  Q 742 2317 493 2490  z M 1715 2534  L 1722 2528  Q 2470 2694 2966 3113  Q 3462 3533 3462 3994  Q 3462 4192 3238 4192  Q 3002 4192 2714 3891  Q 2342 3514 1715 2534  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-34" d="M 3027 1069  L 2368 1069  L 2368 0  L 1869 0  L 1869 1069  L 77 1069  L 77 1478  L 2086 4326  L 2368 4326  L 2368 1478  L 3027 1478  L 3027 1069  z M 1869 1478  L 1869 3674  L 333 1478  L 1869 1478  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-4e" d="M 4653 4179  L 4653 4077  Q 4480 4038 4413 4016  Q 4346 3994 4266 3882  Q 4186 3770 4144 3635  Q 4102 3501 4000 3149  L 3066 -96  L 2950 -96  L 1478 3424  L 749 723  Q 691 525 691 378  Q 691 243 790 182  Q 890 122 1139 102  L 1139 0  L -128 0  L -128 102  Q 147 141 262 304  Q 378 467 550 1075  L 1299 3731  Q 1152 4077 749 4077  L 749 4179  L 1773 4179  L 3098 986  L 3776 3469  Q 3827 3648 3827 3750  Q 3827 3923 3740 3987  Q 3654 4051 3386 4077  L 3386 4179  L 4653 4179  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-75" d="M 2950 762  L 3040 704  Q 2733 237 2560 89  Q 2387 -58 2157 -58  Q 1850 -58 1850 250  Q 1850 538 2138 1510  Q 1568 576 1257 253  Q 947 -70 608 -70  Q 269 -70 269 269  Q 269 384 442 1088  L 666 1978  Q 755 2349 755 2406  Q 755 2483 684 2521  Q 614 2560 365 2560  L 365 2650  Q 806 2701 1325 2822  L 1350 2803  L 781 531  Q 762 474 762 429  Q 762 269 890 269  Q 1178 269 1798 1210  Q 2010 1530 2128 1795  Q 2246 2061 2502 2765  L 2976 2765  L 2470 851  Q 2349 390 2349 352  Q 2349 243 2419 243  Q 2496 243 2605 345  Q 2714 448 2950 762  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-32" d="M 3034 877  L 2688 0  L 186 0  L 186 77  L 1325 1286  Q 1773 1754 1965 2144  Q 2157 2534 2157 2950  Q 2157 3379 1920 3616  Q 1683 3853 1267 3853  Q 922 3853 720 3673  Q 518 3494 326 3021  L 192 3053  Q 301 3648 630 3987  Q 960 4326 1523 4326  Q 2054 4326 2380 4006  Q 2707 3686 2707 3200  Q 2707 2477 1888 1613  L 832 486  L 2330 486  Q 2541 486 2665 569  Q 2790 653 2944 915  L 3034 877  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-61" d="M 2963 710  L 3046 640  Q 2688 205 2518 70  Q 2349 -64 2157 -64  Q 1901 -64 1901 198  Q 1901 358 2048 934  Q 1690 397 1389 163  Q 1088 -70 749 -70  Q 467 -70 288 125  Q 109 320 109 672  Q 109 1158 387 1664  Q 666 2170 1094 2496  Q 1523 2822 1939 2822  Q 2368 2822 2451 2451  L 2522 2758  L 2541 2778  L 2931 2822  L 2976 2803  Q 2970 2778 2938 2669  Q 2368 595 2368 346  Q 2368 262 2458 262  Q 2554 262 2790 525  L 2963 710  z M 2336 2310  Q 2336 2477 2240 2579  Q 2144 2682 1978 2682  Q 1542 2682 1139 2093  Q 928 1779 787 1395  Q 646 1011 646 717  Q 646 243 1030 243  Q 1408 243 1843 870  Q 2336 1581 2336 2310  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-4d" d="M 5530 0  L 3738 0  L 3738 122  Q 4115 147 4214 265  Q 4314 384 4314 787  L 4314 3661  L 2682 0  L 2592 0  L 979 3514  L 979 966  Q 979 448 1088 294  Q 1197 141 1574 122  L 1574 0  L 77 0  L 77 122  Q 358 141 480 205  Q 602 269 650 432  Q 698 595 698 966  L 698 3514  Q 698 3878 589 3984  Q 480 4090 90 4115  L 90 4237  L 1357 4237  L 2835 1024  L 4250 4237  L 5523 4237  L 5523 4115  Q 5178 4109 5072 3993  Q 4966 3878 4966 3520  L 4966 717  Q 4966 378 5072 262  Q 5178 147 5530 122  L 5530 0  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-4c" d="M 3827 1114  L 3520 0  L 77 0  L 77 122  Q 429 141 531 256  Q 634 371 634 736  L 634 3494  Q 634 3872 541 3981  Q 448 4090 77 4115  L 77 4237  L 1888 4237  L 1888 4115  Q 1498 4090 1392 3984  Q 1286 3878 1286 3507  L 1286 538  Q 1286 358 1398 304  Q 1510 250 1862 250  L 2310 250  Q 3085 250 3392 640  Q 3520 813 3661 1114  L 3827 1114  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-50" d="M 102 4237  L 1760 4237  Q 2669 4237 3149 3834  Q 3469 3565 3469 3072  Q 3469 2560 3104 2234  Q 2835 1990 2553 1916  Q 2272 1843 1734 1843  Q 1549 1843 1293 1862  L 1293 717  Q 1293 352 1398 246  Q 1504 141 1894 122  L 1894 0  L 102 0  L 102 122  Q 474 147 557 256  Q 640 365 640 781  L 640 3526  Q 640 3885 547 3987  Q 454 4090 102 4115  L 102 4237  z M 1293 3770  L 1293 2118  Q 1510 2099 1683 2099  Q 2202 2099 2486 2352  Q 2771 2605 2771 3040  Q 2771 3558 2476 3779  Q 2182 4000 1517 4000  Q 1382 4000 1337 3952  Q 1293 3904 1293 3770  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-33" d="M 390 3264  L 288 3290  Q 435 3770 748 4048  Q 1062 4326 1542 4326  Q 1990 4326 2265 4083  Q 2541 3840 2541 3450  Q 2541 2925 1946 2566  Q 2298 2413 2477 2227  Q 2758 1914 2758 1402  Q 2758 890 2464 506  Q 2246 211 1840 60  Q 1434 -90 979 -90  Q 262 -90 262 275  Q 262 378 339 442  Q 416 506 525 506  Q 685 506 915 339  Q 1197 141 1466 141  Q 1818 141 2058 425  Q 2298 710 2298 1120  Q 2298 1856 1632 2048  Q 1434 2112 979 2112  L 979 2202  Q 1338 2323 1517 2432  Q 2035 2726 2035 3290  Q 2035 3610 1852 3776  Q 1670 3942 1344 3942  Q 768 3942 390 3264  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-66" d="M 262 2739  L 858 2739  Q 1107 3546 1318 3846  Q 1664 4339 2163 4339  Q 2400 4339 2557 4227  Q 2714 4115 2714 3942  Q 2714 3834 2634 3750  Q 2554 3667 2445 3667  Q 2355 3667 2281 3737  Q 2208 3808 2208 3917  Q 2208 3981 2240 4038  Q 2272 4096 2272 4115  Q 2272 4198 2131 4198  Q 1862 4198 1676 3849  Q 1491 3501 1350 2739  L 2035 2739  L 1997 2534  L 1306 2534  L 845 486  Q 435 -1325 -435 -1325  Q -653 -1325 -797 -1213  Q -941 -1101 -941 -934  Q -941 -826 -870 -746  Q -800 -666 -698 -666  Q -589 -666 -521 -733  Q -454 -800 -454 -902  Q -454 -947 -483 -1001  Q -512 -1056 -512 -1088  Q -512 -1190 -384 -1190  Q 13 -1190 237 -154  L 800 2534  L 218 2534  L 262 2739  z " transform="scale(0.015625)" />
+    <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-64" d="M 3334 4371  L 3373 4333  L 3123 3360  L 2739 1958  Q 2323 429 2323 384  Q 2323 256 2438 256  Q 2522 256 2614 336  Q 2707 416 2963 710  L 3040 646  Q 2547 -83 2099 -83  Q 1978 -83 1907 -6  Q 1837 70 1837 205  Q 1837 397 1920 774  Q 1645 307 1379 118  Q 1114 -70 781 -70  Q 461 -70 278 125  Q 96 320 96 678  Q 96 1440 713 2131  Q 1331 2822 1965 2822  Q 2163 2822 2256 2732  Q 2349 2643 2381 2451  L 2387 2451  L 2675 3494  Q 2765 3808 2765 3949  Q 2765 4051 2694 4076  Q 2624 4102 2355 4115  L 2355 4224  Q 2848 4269 3334 4371  z M 2278 2310  Q 2278 2477 2185 2576  Q 2093 2675 1978 2675  Q 1677 2675 1395 2381  Q 1075 2042 864 1571  Q 653 1101 653 704  Q 653 486 752 361  Q 851 237 1024 237  Q 1312 237 1606 550  Q 1901 864 2089 1350  Q 2278 1837 2278 2310  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-44" d="M 838 4179  L 2611 4179  Q 3469 4179 3974 3731  Q 4480 3283 4480 2458  Q 4480 1325 3456 531  Q 2778 0 1594 0  L -51 0  L -51 102  Q 224 154 310 230  Q 397 307 474 589  L 1254 3437  Q 1325 3686 1325 3814  Q 1325 3949 1222 4009  Q 1120 4070 838 4077  L 838 4179  z M 1984 3738  L 1229 1037  Q 1088 525 1088 429  Q 1088 192 1523 192  Q 2470 192 3066 768  Q 3398 1088 3584 1597  Q 3770 2106 3770 2611  Q 3770 3386 3270 3763  Q 2970 3987 2432 3987  Q 2227 3987 2128 3939  Q 2029 3891 1984 3738  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-4b" d="M 4627 0  L 2688 0  L 2688 122  L 2861 128  Q 3130 134 3130 282  Q 3130 397 2922 643  Q 2714 890 2253 1370  L 1613 2029  L 1446 1894  L 1446 710  Q 1446 352 1548 253  Q 1651 154 2016 122  L 2016 0  L 211 0  L 211 122  Q 589 141 691 262  Q 794 384 794 800  L 794 3514  Q 794 3872 691 3981  Q 589 4090 218 4115  L 218 4237  L 2022 4237  L 2022 4115  Q 1632 4090 1539 3987  Q 1446 3885 1446 3507  L 1446 2227  L 2586 3277  Q 2861 3533 2973 3667  Q 3085 3802 3085 3910  Q 3085 4013 3030 4057  Q 2976 4102 2822 4109  L 2662 4115  L 2662 4237  L 4320 4237  L 4320 4115  Q 3994 4090 3824 4003  Q 3654 3917 3322 3597  L 2131 2458  L 3629 819  Q 4026 384 4214 253  Q 4403 122 4627 122  L 4627 0  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-2016" d="M 2522 -1210  L 2099 -1210  L 2099 4416  L 2522 4416  L 2522 -1210  z M 1248 -1210  L 826 -1210  L 826 4416  L 1248 4416  L 1248 -1210  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Regular-3c" d="M 3974 -154  L 358 1594  L 358 1658  L 3974 3418  L 3974 3002  L 1210 1626  L 3974 250  L 3974 -154  z " transform="scale(0.015625)" />
+     <path xmlns="http://www.w3.org/2000/svg" id="STIXGeneral-Italic-3b5" d="M 2304 627  L 2406 563  Q 1907 -70 1133 -70  Q 192 -70 192 640  Q 192 928 403 1158  Q 614 1389 934 1472  Q 774 1498 684 1616  Q 595 1734 595 1882  Q 602 2266 995 2544  Q 1389 2822 2029 2822  Q 2336 2822 2528 2672  Q 2720 2522 2720 2291  Q 2720 2163 2617 2080  Q 2515 1997 2413 1997  Q 2298 1997 2230 2067  Q 2163 2138 2163 2253  Q 2163 2317 2211 2409  Q 2259 2502 2259 2560  Q 2259 2688 2022 2688  Q 1683 2688 1401 2496  Q 1120 2304 1120 1907  Q 1120 1741 1251 1654  Q 1382 1568 1594 1568  Q 1613 1568 1728 1590  Q 1843 1613 1932 1613  Q 2022 1613 2086 1574  Q 2150 1536 2150 1478  Q 2150 1306 1862 1306  Q 1805 1306 1721 1334  Q 1638 1363 1568 1363  Q 1286 1363 1014 1184  Q 742 1005 742 678  Q 742 410 908 285  Q 1075 160 1312 160  Q 1869 160 2304 627  z " transform="scale(0.015625)" />
+    </defs></svg><hr><ol class="algorithm-lines"><li class="algorithm-line"><span class="line-number" aria-hidden="true">1</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">运行当前输入的 embedding 与 Prelude，并更新它们的 KV。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">2</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">按随机策略或已保存 warm start 初始化 </span><span class="math-run" data-tex="s"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="7.0" height="9.0" viewBox="0 0 7 9" version="1.1" class="formula-svg" role="img" aria-label="s" style="width:0.43750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 8) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-73" transform="translate(0 0.796875)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">3</span><div class="operation" style="--depth:0"><div class="chunks"><span class="math-run" data-tex="p_{\rm prev}(v)\leftarrow1/V"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.0" height="16.0" viewBox="0 0 89 16" version="1.1" class="formula-svg" role="img" aria-label="p_{\rm prev}(v)\leftarrow1/V" style="width:5.56250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-70" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-70" transform="translate(50.399994 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-72" transform="translate(85.399983 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-65" transform="translate(108.709975 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-76" transform="translate(139.78997 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(179.199335 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(212.499323 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(256.899316 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(304.639301 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(411.679288 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2f" transform="translate(461.679272 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-56" transform="translate(489.47926 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">4</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">for </span><span class="math-run" data-tex="r=1,\ldots,R_{\max}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.0" height="14.0" viewBox="0 0 89 14" version="1.1" class="formula-svg" role="img" aria-label="r=1,\ldots,R_{\max}" style="width:5.56250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-72" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-3d" transform="translate(53.33999 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(136.279971 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(186.279956 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2026" transform="translate(225.719937 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(325.719922 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-52" transform="translate(365.159903 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-6d" transform="translate(426.259894 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-61" transform="translate(480.719885 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-78" transform="translate(511.799881 -12.821875) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run"> do</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">5</span><div class="operation" style="--depth:1"><div class="chunks"><span class="math-run" data-tex="v\leftarrow A_s s+A_e e"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86.0" height="14.0" viewBox="0 0 86 14" version="1.1" class="formula-svg" role="img" aria-label="v\leftarrow A_s s+A_e e" style="width:5.37500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(0 0.203125)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(58.83999 0.203125)" />
+    <use xlink:href="#STIXGeneral-Italic-41" transform="translate(165.879977 0.203125)" />
+    <use xlink:href="#STIXGeneral-Italic-73" transform="translate(226.979968 -13.025) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-73" transform="translate(258.619339 0.203125)" />
+    <use xlink:href="#STIXGeneral-Regular-2b" transform="translate(311.959329 0.203125)" />
+    <use xlink:href="#STIXGeneral-Italic-41" transform="translate(394.89931 0.203125)" />
+    <use xlink:href="#STIXGeneral-Italic-65" transform="translate(455.999301 -13.025) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Italic-65" transform="translate(491.488672 0.203125)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">6</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">for </span><span class="math-run" data-tex="\ell=1,\ldots,4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="70.0" height="14.0" viewBox="0 0 70 14" version="1.1" class="formula-svg" role="img" aria-label="\ell=1,\ldots,4" style="width:4.37500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-2113" transform="translate(0 0.296875)" />
+    <use xlink:href="#STIXGeneral-Regular-3d" transform="translate(72.33999 0.296875)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(155.279971 0.296875)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(205.279956 0.296875)" />
+    <use xlink:href="#STIXGeneral-Regular-2026" transform="translate(244.719937 0.296875)" />
+    <use xlink:href="#STIXGeneral-Regular-2c" transform="translate(344.719922 0.296875)" />
+    <use xlink:href="#STIXGeneral-Regular-34" transform="translate(384.159903 0.296875)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run"> do</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">7</span><div class="operation" style="--depth:2"><div class="chunks"><span class="text-run">由 </span><span class="math-run" data-tex="N_1(v)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35.0" height="14.0" viewBox="0 0 35 14" version="1.1" class="formula-svg" role="img" aria-label="N_1(v)" style="width:2.18750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-4e" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-31" transform="translate(66.699997 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(106.109361 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(139.409349 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(183.809343 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run"> 形成 Q、K、V；把当前 KV 写入展开地址。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">8</span><div class="operation" style="--depth:2"><div class="chunks"><span class="text-run">按 π 取历史 KV；计算因果注意力输出 a。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">9</span><div class="operation" style="--depth:2"><div class="chunks"><span class="math-run" data-tex="u\leftarrow N_2(v+a)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86.0" height="14.0" viewBox="0 0 86 14" version="1.1" class="formula-svg" role="img" aria-label="u\leftarrow N_2(v+a)" style="width:5.37500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-75" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(64.439981 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-4e" transform="translate(171.479968 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-32" transform="translate(238.179965 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(277.58933 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(310.889317 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2b" transform="translate(369.729308 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-61" transform="translate(452.669289 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(502.769279 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">10</span><div class="operation" style="--depth:2"><div class="chunks"><span class="math-run" data-tex="v\leftarrow N_4(u+\operatorname{MLP}(N_3(u)))"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="157.0" height="14.0" viewBox="0 0 157 14" version="1.1" class="formula-svg" role="img" aria-label="v\leftarrow N_4(u+\operatorname{MLP}(N_3(u)))" style="width:9.81250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(0 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(58.83999 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-4e" transform="translate(165.879977 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-34" transform="translate(232.579974 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(271.989339 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-75" transform="translate(305.289326 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-2b" transform="translate(369.729308 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-4d" transform="translate(452.669289 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-4c" transform="translate(541.569283 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-50" transform="translate(602.669273 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(658.36927 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-4e" transform="translate(691.669258 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-33" transform="translate(758.369255 -12.821875) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(797.778619 0.40625)" />
+    <use xlink:href="#STIXGeneral-Italic-75" transform="translate(831.078607 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(881.078592 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(914.37858 0.40625)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(947.678568 0.40625)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">11</span><div class="operation" style="--depth:1"><div class="chunks"><span class="math-run" data-tex="s\leftarrow v"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="33.0" height="9.0" viewBox="0 0 33 9" version="1.1" class="formula-svg" role="img" aria-label="s\leftarrow v" style="width:2.06250em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 8) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-73" transform="translate(0 0.09375)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(53.33999 0.09375)" />
+    <use xlink:href="#STIXGeneral-Italic-76" transform="translate(160.379977 0.09375)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">；经 </span><span class="math-run" data-tex="N_f"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.0" height="16.0" viewBox="0 0 15 16" version="1.1" class="formula-svg" role="img" aria-label="N_f" style="width:0.93750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-4e" transform="translate(0 0.703125)" />
+    <use xlink:href="#STIXGeneral-Italic-66" transform="translate(66.699997 -12.525) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">、Coda、</span><span class="math-run" data-tex="N_f"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.0" height="16.0" viewBox="0 0 15 16" version="1.1" class="formula-svg" role="img" aria-label="N_f" style="width:0.93750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-4e" transform="translate(0 0.703125)" />
+    <use xlink:href="#STIXGeneral-Italic-66" transform="translate(66.699997 -12.525) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run"> 与 head 读出。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">12</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">取最后位置分布 </span><span class="math-run" data-tex="p_r"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14.0" height="12.0" viewBox="0 0 14 12" version="1.1" class="formula-svg" role="img" aria-label="p_r" style="width:0.87500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 8) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-70" transform="translate(0 0.90625)" />
+    <use xlink:href="#STIXGeneral-Italic-72" transform="translate(50.399994 -12.321875) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">；更新当前位置的 Coda KV。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">13</span><div class="operation" style="--depth:1"><div class="chunks"><span class="math-run" data-tex="d\leftarrow D_{\rm KL}(p_{\rm prev}\|p_r)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="116.0" height="17.0" viewBox="0 0 116 17" version="1.1" class="formula-svg" role="img" aria-label="d\leftarrow D_{\rm KL}(p_{\rm prev}\|p_r)" style="width:7.25000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 12) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-64" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(64.439981 0)" />
+    <use xlink:href="#STIXGeneral-Italic-44" transform="translate(171.479968 0)" />
+    <use xlink:href="#STIXGeneral-Regular-4b" transform="translate(243.67995 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-4c" transform="translate(294.219937 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-28" transform="translate(341.399306 0)" />
+    <use xlink:href="#STIXGeneral-Italic-70" transform="translate(374.699294 0)" />
+    <use xlink:href="#STIXGeneral-Regular-70" transform="translate(425.099287 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-72" transform="translate(460.099277 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-65" transform="translate(483.409268 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-76" transform="translate(514.489264 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2016" transform="translate(553.898628 0)" />
+    <use xlink:href="#STIXGeneral-Italic-70" transform="translate(606.198616 0)" />
+    <use xlink:href="#STIXGeneral-Italic-72" transform="translate(656.59861 -13.228125) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-29" transform="translate(688.237981 0)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">14</span><div class="operation" style="--depth:1"><div class="chunks"><span class="math-run" data-tex="p_{\rm prev}\leftarrow p_r"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="62.0" height="13.0" viewBox="0 0 62 13" version="1.1" class="formula-svg" role="img" aria-label="p_{\rm prev}\leftarrow p_r" style="width:3.87500em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 8) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-70" transform="translate(0 0.09375)" />
+    <use xlink:href="#STIXGeneral-Regular-70" transform="translate(50.399994 -13.134375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-72" transform="translate(85.399983 -13.134375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-65" transform="translate(108.709975 -13.134375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-76" transform="translate(139.78997 -13.134375) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-2190" transform="translate(193.639331 0.09375)" />
+    <use xlink:href="#STIXGeneral-Italic-70" transform="translate(300.679318 0.09375)" />
+    <use xlink:href="#STIXGeneral-Italic-72" transform="translate(351.079312 -13.134375) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run">。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">15</span><div class="operation" style="--depth:1"><div class="chunks"><span class="text-run">if </span><span class="math-run" data-tex="d&lt;\varepsilon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31.0" height="12.0" viewBox="0 0 31 12" version="1.1" class="formula-svg" role="img" aria-label="d&lt;\varepsilon" style="width:1.93750em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-64" transform="translate(0 0.703125)" />
+    <use xlink:href="#STIXGeneral-Regular-3c" transform="translate(64.439981 0.703125)" />
+    <use xlink:href="#STIXGeneral-Italic-3b5" transform="translate(147.379962 0.703125)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run"> 或 </span><span class="math-run" data-tex="r=R_{\max}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52.0" height="14.0" viewBox="0 0 52 14" version="1.1" class="formula-svg" role="img" aria-label="r=R_{\max}" style="width:3.25000em;height:auto;fill:currentColor;">
+ <g>
+  <g>
+   
+   <g transform="translate(0 11) scale(0.16 -0.16)">
+    <use xlink:href="#STIXGeneral-Italic-72" transform="translate(0 0.703125)" />
+    <use xlink:href="#STIXGeneral-Regular-3d" transform="translate(53.33999 0.703125)" />
+    <use xlink:href="#STIXGeneral-Italic-52" transform="translate(136.279971 0.703125)" />
+    <use xlink:href="#STIXGeneral-Regular-6d" transform="translate(197.379962 -12.525) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-61" transform="translate(251.839954 -12.525) scale(0.7)" />
+    <use xlink:href="#STIXGeneral-Regular-78" transform="translate(282.919949 -12.525) scale(0.7)" />
+   </g>
+  </g>
+ </g>
+</svg></span><span class="text-run"> then 保存本轮 logits 与 r；break。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">16</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">按配置从保存的本轮分布采样 token，并追加序列。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">17</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">若启用 continuous compute，保存退出时最后位置的 s。</span></div></div></li><li class="algorithm-line"><span class="line-number" aria-hidden="true">18</span><div class="operation" style="--depth:0"><div class="chunks"><span class="text-run">更新生成状态；遇 EOS 或生成长度上限则结束。</span></div></div></li></ol><hr><script type="application/json" class="algorithm-source">{"key": "HG2", "title": "Huginn 单样本逐轮 KL 退出", "lines": [{"depth": 0, "chunks": [{"t": "运行当前输入的 embedding 与 Prelude，并更新它们的 KV。"}], "note": ""}, {"depth": 0, "chunks": [{"t": "按随机策略或已保存 warm start 初始化 "}, {"m": "s"}, {"t": "。"}], "note": ""}, {"depth": 0, "chunks": [{"m": "p_{\\rm prev}(v)\\leftarrow1/V"}, {"t": "。"}], "note": ""}, {"depth": 0, "chunks": [{"t": "for "}, {"m": "r=1,\\ldots,R_{\\max}"}, {"t": " do"}], "note": ""}, {"depth": 1, "chunks": [{"m": "v\\leftarrow A_s s+A_e e"}, {"t": "。"}], "note": ""}, {"depth": 1, "chunks": [{"t": "for "}, {"m": "\\ell=1,\\ldots,4"}, {"t": " do"}], "note": ""}, {"depth": 2, "chunks": [{"t": "由 "}, {"m": "N_1(v)"}, {"t": " 形成 Q、K、V；把当前 KV 写入展开地址。"}], "note": ""}, {"depth": 2, "chunks": [{"t": "按 π 取历史 KV；计算因果注意力输出 a。"}], "note": ""}, {"depth": 2, "chunks": [{"m": "u\\leftarrow N_2(v+a)"}, {"t": "。"}], "note": ""}, {"depth": 2, "chunks": [{"m": "v\\leftarrow N_4(u+\\operatorname{MLP}(N_3(u)))"}, {"t": "。"}], "note": ""}, {"depth": 1, "chunks": [{"m": "s\\leftarrow v"}, {"t": "；经 "}, {"m": "N_f"}, {"t": "、Coda、"}, {"m": "N_f"}, {"t": " 与 head 读出。"}], "note": ""}, {"depth": 1, "chunks": [{"t": "取最后位置分布 "}, {"m": "p_r"}, {"t": "；更新当前位置的 Coda KV。"}], "note": ""}, {"depth": 1, "chunks": [{"m": "d\\leftarrow D_{\\rm KL}(p_{\\rm prev}\\|p_r)"}, {"t": "。"}], "note": ""}, {"depth": 1, "chunks": [{"m": "p_{\\rm prev}\\leftarrow p_r"}, {"t": "。"}], "note": ""}, {"depth": 1, "chunks": [{"t": "if "}, {"m": "d\u003c\\varepsilon"}, {"t": " 或 "}, {"m": "r=R_{\\max}"}, {"t": " then 保存本轮 logits 与 r；break。"}], "note": ""}, {"depth": 0, "chunks": [{"t": "按配置从保存的本轮分布采样 token，并追加序列。"}], "note": ""}, {"depth": 0, "chunks": [{"t": "若启用 continuous compute，保存退出时最后位置的 s。"}], "note": ""}, {"depth": 0, "chunks": [{"t": "更新生成状态；遇 EOS 或生成长度上限则结束。"}], "note": ""}]}</script></section>
